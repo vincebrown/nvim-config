@@ -147,6 +147,14 @@ return {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        eslint_d = {
+          settings = {
+            workingDirectories = { mode = 'auto' },
+            experimental = {
+              useFlatConfig = true,
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = {...},
