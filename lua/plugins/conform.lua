@@ -4,12 +4,12 @@ return {
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<leader>cf',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = 'Format Buffer',
       },
     },
     opts = {
@@ -32,12 +32,6 @@ return {
         typescriptreact = { 'prettier' },
         graphql = { 'prettier' },
         json = { 'prettier' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use a sub-list to tell conform to run *until* a formatter
-        -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
       },
     },
   },

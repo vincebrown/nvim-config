@@ -28,17 +28,17 @@ return {
           :find()
       end
 
-      vim.keymap.set('n', '<leader>ha', function()
+      vim.keymap.set('n', '<leader>cha', function()
         harpoon:list():add()
-      end, { desc = '[H]arpoon [A]dd' })
+      end, { desc = 'Add File' })
 
       vim.keymap.set('n', '<leader>hr', function()
         harpoon:list():remove()
-      end, { desc = '[H]arpoon [R]emove' })
+      end, { desc = 'Remove File' })
 
       vim.keymap.set('n', '<leader>hq', function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
-      end, { desc = '[H]arpoon [Q]uick Menu' })
+      end, { desc = 'Quick Menu' })
 
       vim.keymap.set('n', '<leader>ht', function()
         toggle_telescope(harpoon:list())
