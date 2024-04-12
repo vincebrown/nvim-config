@@ -9,7 +9,7 @@ return {
       relativenumber = true,
     },
     config = function()
-      vim.keymap.set('n', '<leader>zm', ':ZenMode<CR>', { desc = '[Z]en [M]ode Toggle' })
+      vim.keymap.set('n', '<leader>cz', ':ZenMode<CR>')
     end,
   },
 }

@@ -62,12 +62,6 @@ return {
           name = 'Search',
           c = 'Color Schemes',
           d = 'Diagnostics',
-          e = {
-            name = 'Explorer',
-            e = 'Toggle',
-            b = 'Buffers',
-            g = 'Git Status',
-          },
           f = 'Files',
           g = 'By Grep',
           h = 'Help',
@@ -80,11 +74,7 @@ return {
           ['/'] = 'Grep Open Files',
         },
 
-        ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = 'Rename', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Harpoon', _ = 'which_key_ignore' },
-        ['<leader>z'] = { name = 'Zen Mode', _ = 'which_key_ignore' },
       }
     end,
   },
