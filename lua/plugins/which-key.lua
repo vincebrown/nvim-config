@@ -23,6 +23,29 @@ return {
       }
 
       which_key.register {
+        -- LSP
+        ['g'] = {
+          name = 'Goto',
+          d = 'Goto Definition',
+          D = 'Goto Declaration',
+          r = 'Goto References',
+          I = 'Goto Implementation',
+          ['td'] = 'Goto Type Definition',
+        },
+
+        ['K'] = 'Hover Documentation',
+
+        -- Buffers (Bufferline)
+        ['<leader>b'] = {
+          name = 'Buffers',
+          p = 'Toggle Pin',
+          P = 'Delete Non Pinned',
+          o = 'Delete Other',
+          r = 'Delete to the Right',
+          l = 'Delete to the Left',
+          b = 'Previous',
+          n = 'Next',
+        },
 
         -- CODE
         ['<leader>c'] = {
@@ -40,6 +63,7 @@ return {
             l = 'Third Item',
             [';'] = 'Fourth Item',
           },
+          r = 'Rename Variable',
           t = {
             name = 'Trouble',
             t = 'Toggle',
