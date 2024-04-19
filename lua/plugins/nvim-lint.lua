@@ -5,7 +5,6 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        -- markdown = { 'markdownlint' },
         javascript = { 'eslint' },
         typescript = { 'eslint' },
         javascriptreact = { 'eslint' },
@@ -20,6 +19,12 @@ return {
         callback = function()
           require('lint').try_lint()
         end,
+      })
+      -- Autocommand to run eslint fix before writing buffer
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+        command = 'silent! EslintFixAll',
+        group = lint_augroup,
       })
     end,
   },

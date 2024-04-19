@@ -14,4 +14,10 @@ return {
   { 'sainnhe/gruvbox-material' },
   { 'sainnhe/everforest' },
   { 'EdenEast/nightfox.nvim' },
+  {
+    '2nthony/vitesse.nvim',
+    dependencies = {
+      'tjdevries/colorbuddy.nvim',
+    },
+  },
 }

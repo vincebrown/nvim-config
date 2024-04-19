@@ -2,22 +2,23 @@ return {
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
-    config = function() -- This is the function that runs, AFTER loading
+    config = function()
+      local icons = require 'utils.icons'
       local which_key = require 'which-key'
 
       which_key.setup {
         icons = {
-          breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
-          separator = '', -- symbol used between a key and it's label
-          group = '+', -- symbol prepended to a group
+          breadcrumb = icons.breadCrumb,
+          separator = icons.arrowRight,
+          group = icons.plus,
         },
         window = {
-          border = 'shadow', -- none, single, double, shadow
-          position = 'bottom', -- bottom, top
-          margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
-          padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-          winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
-          zindex = 1000, -- positive value to position WhichKey above other floating windows.
+          border = 'shadow',
+          position = 'bottom',
+          margin = { 1, 0, 1, 0 },
+          padding = { 1, 2, 1, 2 },
+          winblend = 0,
+          zindex = 1000,
         },
         ignore_missing = true,
       }
@@ -45,6 +46,7 @@ return {
           l = 'Delete to the Left',
           b = 'Previous',
           n = 'Next',
+          s = 'Save Buffer',
         },
 
         -- CODE
@@ -63,6 +65,7 @@ return {
             l = 'Third Item',
             [';'] = 'Fourth Item',
           },
+          i = 'Add Missing imports',
           r = 'Rename Variable',
           t = {
             name = 'Trouble',
@@ -70,6 +73,7 @@ return {
             d = 'Document',
             w = 'Workspace',
           },
+          u = 'Toggle Undo Tree',
           z = 'Zen Mode',
         },
 
