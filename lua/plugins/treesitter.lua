@@ -1,7 +1,7 @@
 return {
   { -- highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    build = ':tsupdate',
+    build = ':TSUpdate',
     event = { 'bufreadpre', 'bufnewfile' },
     dependencies = {
       'windwp/nvim-ts-autotag',
