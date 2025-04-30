@@ -1,3 +1,4 @@
+-- Typescript specific plugins
 return {
   {
     'pmizio/typescript-tools.nvim',

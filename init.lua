@@ -1,7 +1,3 @@
-require 'options'
-require 'keymaps'
-require 'autocommands'
-
 -- Initialize Lazy
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
@@ -12,9 +8,20 @@ end ---@diagnostic disable-next-line: undefined-field
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup {
-  { import = 'plugins' },
-}
+if vim.g.vscode then
+  require 'vscode-keymaps'
+  require('lazy').setup {
+    { import = 'vscode-plugins' },
+  }
+  -- VSCode extension
+else
+  require 'keymaps'
+  require 'options'
+  require 'autocommands'
+  require('lazy').setup {
+    { import = 'plugins' },
+  }
 
--- Set Colorscheme
-vim.cmd.colorscheme 'catppuccin-mocha'
+  -- Set Colorscheme
+  vim.cmd.colorscheme 'gruvbox-material'
+end

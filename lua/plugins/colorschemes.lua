@@ -14,10 +14,44 @@ return {
   { 'sainnhe/gruvbox-material' },
   { 'sainnhe/everforest' },
   { 'EdenEast/nightfox.nvim' },
+  { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },
+  { 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = false, priority = 1000 },
   {
     '2nthony/vitesse.nvim',
     dependencies = {
       'tjdevries/colorbuddy.nvim',
     },
+  },
+  {
+    'vague2k/vague.nvim',
+    config = function()
+      require('vague').setup {
+        -- "none" is the same thing as default. But "italic" and "bold" are also valid options
+        boolean = 'bold',
+        number = 'none',
+        float = 'none',
+        error = 'bold',
+        comments = 'italic',
+        conditionals = 'none',
+        functions = 'none',
+        headings = 'bold',
+        operators = 'none',
+        strings = 'italic',
+        variables = 'none',
+
+        -- keywords
+        keywords = 'none',
+        keyword_return = 'italic',
+        keywords_loop = 'none',
+        keywords_label = 'none',
+        keywords_exception = 'none',
+
+        -- builtin
+        builtin_constants = 'bold',
+        builtin_functions = 'none',
+        builtin_types = 'bold',
+        builtin_variables = 'none',
+      }
+    end,
   },
 }

@@ -17,16 +17,7 @@ return {
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      -- Pair matching () {} []
-      require('mini.pairs').setup()
-
-      -- commenting out code
-      require('mini.comment').setup()
-
-      -- highlight trailing spaces
-      require('mini.trailspace').setup()
-
-      -- require('mini.files').setup()
+      -- require('mini.jump2d').setup()
     end,
   },
 }

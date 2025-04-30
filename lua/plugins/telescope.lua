@@ -1,11 +1,12 @@
+-- Fuzzy Finder
 return {
-  { -- Fuzzy Finder (files, lsp, etc)
+  {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
 
         -- `build` is used to run some command when the plugin is installed/updated.
@@ -43,16 +44,18 @@ return {
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Neovim Help' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search Files' })
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search Files' })
+      vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Search Recent Files' })
+      vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'Search Git Files' })
+      vim.keymap.set('n', '<leader>fc', builtin.colorscheme, { desc = 'Search Colorschemes' })
+      vim.keymap.set('n', '<leader>sb', builtin.current_buffer_fuzzy_find, { desc = 'Search Current Buffer' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Telescope Builtin' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search Current Word' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search By Grep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume picker' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files' })
-      vim.keymap.set('n', '<leader>sc', builtin.colorscheme, { desc = 'Search Colorschemes' })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Neovim Help' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Search Open Buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
