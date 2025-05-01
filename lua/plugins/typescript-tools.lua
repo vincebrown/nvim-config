@@ -11,7 +11,7 @@ return {
         settings = {
           complete_function_calls = true,
           include_completions_with_insert_text = true,
-          code_lens = 'implementations_only',
+          code_lens = 'off',
           expose_as_code_action = 'all',
           tsserver_file_preferences = {
             includeCompletionsForModuleExports = true,

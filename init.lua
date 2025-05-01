@@ -23,5 +23,5 @@ else
   }
 
   -- Set Colorscheme
-  vim.cmd.colorscheme 'gruvbox-material'
+  vim.cmd.colorscheme 'kanagawa-paper'
 end
