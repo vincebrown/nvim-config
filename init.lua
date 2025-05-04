@@ -1,3 +1,6 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Initialize Lazy
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
@@ -15,9 +18,10 @@ if vim.g.vscode then
   }
   -- VSCode extension
 else
-  require 'keymaps'
   require 'options'
+  require 'keymaps'
   require 'autocommands'
+
   require('lazy').setup {
     { import = 'plugins' },
   }
