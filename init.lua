@@ -27,5 +27,5 @@ else
   }
 
   -- Set Colorscheme
-  vim.cmd.colorscheme 'kanagawa-paper'
+  vim.cmd.colorscheme 'catppuccin-mocha'
 end

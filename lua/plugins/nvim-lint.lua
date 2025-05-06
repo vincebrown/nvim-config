@@ -9,6 +9,7 @@ return {
         typescript = { 'eslint' },
         javascriptreact = { 'eslint' },
         typescriptreact = { 'eslint' },
+        ruby = { 'rubocop' },
       }
 
       -- Create autocommand which carries out the actual linting
