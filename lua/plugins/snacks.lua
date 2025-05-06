@@ -7,7 +7,7 @@ return {
     bufdelete = { enabled = true },
     dim = { enabled = true },
     indent = { enabled = true },
-    lazygit = { enabled = true },
+    lazygit = { enabled = true, configure = true },
     scroll = { enabled = true },
     zen = {
       enabled = true,
