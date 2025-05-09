@@ -6,13 +6,13 @@ return {
   opts = {
     bufdelete = { enabled = true },
     dim = { enabled = true },
-    indent = { enabled = true },
+    indent = { enabled = false },
     lazygit = { enabled = true, configure = true },
     scroll = { enabled = true },
     zen = {
       enabled = true,
       toggles = {
-        dim = true,
+        dim = false,
         indent = false,
         git_signs = false,
         mini_diff_signs = false,
