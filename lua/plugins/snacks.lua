@@ -25,14 +25,7 @@ return {
       function()
         Snacks.zen()
       end,
-      desc = 'Toggle Zen Mode',
-    },
-    {
-      '<leader>Z',
-      function()
-        Snacks.zen.zoom()
-      end,
-      desc = 'Toggle Zoom',
+      desc = 'Toggle zen mode',
     },
     {
       '<leader>gg',

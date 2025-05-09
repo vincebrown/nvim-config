@@ -6,3 +6,4 @@ nvim
 spell/
 lazy-lock.json
 .vscode/
+**/.claude/settings.local.json

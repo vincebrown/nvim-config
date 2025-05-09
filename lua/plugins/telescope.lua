@@ -18,14 +18,14 @@ return {
     config = function()
       require('telescope').setup {
         defaults = {
-          require('telescope.themes').get_ivy(),
+          initial_mode = 'normal',
         },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
           aerial = {
-            col1_width = 4,
+            col1_width = 5,
             col2_width = 30,
             format_symbol = function(symbol_path, filetype)
               if filetype == 'json' or filetype == 'yaml' then
@@ -39,6 +39,7 @@ return {
         },
         pickers = {
           find_files = require('telescope.themes').get_ivy {
+            initial_mode = 'insert',
             layout_config = {
               height = 30,
             },
@@ -47,6 +48,15 @@ return {
             layout_config = {
               height = 30,
             },
+          },
+          grep_string = {
+            initial_mode = 'insert',
+          },
+          live_grep = {
+            initial_mode = 'insert',
+          },
+          current_buffer_fuzzy_find = {
+            initial_mode = 'insert',
           },
           colorscheme = {
             enable_preview = true,
@@ -61,47 +71,40 @@ return {
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search Files' })
-      vim.keymap.set('n', '<leader>fr', function()
-        require('telescope.builtin').oldfiles {
+      local set = vim.keymap.set
+
+      set('n', '<leader>ff', builtin.find_files, { desc = 'Search Files' })
+      set('n', '<leader>fr', function()
+        builtin.oldfiles {
           cwd_only = true,
         }
       end, { desc = 'Search Recent Files (cwd only)' })
-      vim.keymap.set('n', '<leader>fR', builtin.oldfiles, { desc = 'Search Recent Files' })
-      vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'Search Git Files' })
-      vim.keymap.set('n', '<leader>fc', builtin.colorscheme, { desc = 'Search Colorschemes' })
-      vim.keymap.set('n', '<leader>sb', builtin.current_buffer_fuzzy_find, { desc = 'Search Current Buffer' })
-      vim.keymap.set('n', '<leader>sc', ':Telescope aerial<CR>', { desc = 'Search file code' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Telescope Builtin' })
-      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search Current Word' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search By Grep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume picker' })
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Neovim Help' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Search Open Buffers' })
-
-      -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      set('n', '<leader>fR', builtin.oldfiles, { desc = 'Search Recent Files' })
+      set('n', '<leader>fg', builtin.git_files, { desc = 'Search Git Files' })
+      set('n', '<leader>fc', builtin.colorscheme, { desc = 'Search Colorschemes' })
+      set('n', '<leader>sb', builtin.current_buffer_fuzzy_find, { desc = 'Search Current Buffer' })
+      set('n', '<leader>sc', ':Telescope aerial<CR>', { desc = 'Search code' })
+      set('n', '<leader>st', builtin.builtin, { desc = 'Search telescope builtin' })
+      set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current word' })
+      set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by grep' })
+      set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search diagnostics' })
+      set('n', '<leader>sr', builtin.resume, { desc = 'Search resume picker' })
+      set('n', '<leader>sh', builtin.help_tags, { desc = 'Search neovim help' })
+      set('n', '<leader>sk', builtin.keymaps, { desc = 'Search keymaps' })
+      set('n', '<leader><leader>', builtin.buffers, { desc = 'Search open buffers' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set('n', '<leader>s/', function()
+      set('n', '<leader>s/', function()
         builtin.live_grep {
           grep_open_files = true,
           prompt_title = 'Live Grep in Open Files',
         }
-      end, { desc = 'Grep Open Files' })
+      end, { desc = 'Seach grep open files' })
 
-      vim.keymap.set('n', '<leader>sn', function()
+      set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = 'Search Neovim Files' })
+      end, { desc = 'Search neovim files' })
     end,
   },
 }
