@@ -7,3 +7,5 @@ spell/
 lazy-lock.json
 .vscode/
 **/.claude/settings.local.json
+lua/plugins/dadbod/
+lua/plugins/dadbody/dbs.lua
