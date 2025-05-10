@@ -26,7 +26,7 @@ return {
       -- highlight trailing spaces
       require('mini.trailspace').setup()
 
-      -- require('mini.files').setup()
+      require('mini.icons').setup()
     end,
   },
 }
