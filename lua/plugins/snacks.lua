@@ -9,6 +9,8 @@ return {
     indent = { enabled = false },
     lazygit = { enabled = true, configure = true },
     scroll = { enabled = true },
+    win = { enabled = true },
+    notifier = { enabled = true },
     zen = {
       enabled = true,
       toggles = {
@@ -20,6 +22,14 @@ return {
     },
   },
   keys = {
+    {
+      '<leader>gB',
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = 'Git Browse',
+      mode = { 'n', 'v' },
+    },
     {
       '<leader>z',
       function()
