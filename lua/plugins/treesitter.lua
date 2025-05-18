@@ -41,6 +41,10 @@ return {
           'graphql',
           'dockerfile',
           'gitignore',
+          'go',
+          'gomod',
+          'gowork',
+          'gosum',
         },
         incremental_selection = {
           enable = true,
