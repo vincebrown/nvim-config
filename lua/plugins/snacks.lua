@@ -11,6 +11,9 @@ return {
     scroll = { enabled = true },
     win = { enabled = true },
     notifier = { enabled = true },
+    dashboard = {
+      enabled = true,
+    },
     zen = {
       enabled = true,
       toggles = {
