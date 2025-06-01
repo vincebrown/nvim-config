@@ -10,7 +10,10 @@ return {
     lazygit = { enabled = true, configure = true },
     scroll = { enabled = true },
     win = { enabled = true },
-    notifier = { enabled = true },
+    notifier = {
+      enabled = true,
+      timeout = 4000,
+    },
     dashboard = {
       enabled = true,
     },
@@ -53,6 +56,22 @@ return {
         Snacks.bufdelete()
       end,
       desc = 'Delete Buffer',
+    },
+    {
+      '<leader>ba',
+      function()
+        Snacks.bufdelete.all()
+      end,
+      desc = 'Buffer delete all',
+      mode = 'n',
+    },
+    {
+      '<leader>bo',
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = 'Buffer delete other',
+      mode = 'n',
     },
   },
 
