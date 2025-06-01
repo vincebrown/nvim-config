@@ -29,7 +29,7 @@ return {
         typescriptreact = { 'prettier' },
         graphql = { 'prettier' },
         json = { 'prettier' },
-        go = { 'goimports', 'gofumpt' },
+        go = { 'goimports-reviser', 'gofumpt' },
       },
     },
   },

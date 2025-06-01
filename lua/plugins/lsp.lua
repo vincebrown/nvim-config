@@ -234,15 +234,21 @@ return {
     }
 
     -- Install servers
-    local ensure_installed = vim.tbl_keys(language_servers)
-
-    -- Add other things to install here like formatters etc...
-    vim.list_extend(ensure_installed, {
-      'stylua', -- Used to format Lua code
-    })
+    local lsp_mason_packages_to_install = {
+      'gopls', -- Mason: gopls -> lspconfig: gopls
+      'gofumpt',
+      'goimports',
+      'goimports-reviser',
+      'delve',
+      'vtsls',
+      'eslint-lsp',
+      'prettier',
+      'lua-language-server', -- Mason: lua-language-server -> lspconfig: lua_ls
+      'stylua',
+    }
 
     -- Automatically install servers via mason-tool-installer
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+    require('mason-tool-installer').setup { ensure_installed = lsp_mason_packages_to_install }
 
     for server, config in pairs(language_servers) do
       -- This handles overriding only values explicitly passed
