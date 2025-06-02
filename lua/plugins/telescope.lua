@@ -40,7 +40,6 @@ return {
         pickers = {
           find_files = require('telescope.themes').get_ivy {
             initial_mode = 'insert',
-            hidden = true,
             layout_config = {
               height = 30,
             },

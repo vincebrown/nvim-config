@@ -1,3 +1,14 @@
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
 -- Run this anytime a LSP attaches
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -9,12 +20,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       mode = mode or 'n'
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
     end
-
-    map('K', lsp_buf.hover, 'Hover documentation')
-
-    map('grn', lsp_buf.rename, 'Rename')
-
-    map('gra', lsp_buf.code_action, 'Code Action', { 'n', 'x' })
 
     map('gr', telescope.lsp_references, 'Go to references')
 
@@ -106,9 +111,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end,
       })
     end
+
+    if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+      map('<leader>th', function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+      end, 'Toggle Inlay Hints')
+    end
   end,
 })
 
+-- Show LSP Progress when opening file
 ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
 local progress = vim.defaulttable()
 vim.api.nvim_create_autocmd('LspProgress', {
@@ -151,151 +163,3 @@ vim.api.nvim_create_autocmd('LspProgress', {
     })
   end,
 })
-
--- LSP Plugin config
-return {
-  'neovim/nvim-lspconfig',
-  dependencies = {
-    { 'mason-org/mason.nvim', opts = {} },
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    -- Gives LSP updates when you open file
-    -- Completions
-    'saghen/blink.cmp',
-  },
-  config = function()
-    -- Diagnostic Config
-    -- See :help vim.diagnostic.Opts
-    vim.diagnostic.config {
-      severity_sort = true,
-      float = { border = 'rounded', source = 'if_many' },
-      underline = { severity = vim.diagnostic.severity.ERROR },
-      update_in_insert = false,
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = '󰅚 ',
-          [vim.diagnostic.severity.WARN] = '󰀪 ',
-          [vim.diagnostic.severity.INFO] = '󰋽 ',
-          [vim.diagnostic.severity.HINT] = '󰌶 ',
-        },
-      },
-      virtual_text = {
-        source = 'if_many',
-        spacing = 2,
-        format = function(diagnostic)
-          local diagnostic_message = {
-            [vim.diagnostic.severity.ERROR] = diagnostic.message,
-            [vim.diagnostic.severity.WARN] = diagnostic.message,
-            [vim.diagnostic.severity.INFO] = diagnostic.message,
-            [vim.diagnostic.severity.HINT] = diagnostic.message,
-          }
-          return diagnostic_message[diagnostic.severity]
-        end,
-      },
-    }
-
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-    -- Need to setup servers here
-    local language_servers = {
-      gopls = {
-        filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-        cmd = { 'gopls' },
-        settings = {
-          gopls = {
-            gofumpt = true,
-            codelenses = {
-              gc_details = false,
-              generate = true,
-              regenerate_cgo = true,
-              run_govulncheck = true,
-              test = true,
-              tidy = true,
-              upgrade_dependency = true,
-              vendor = true,
-            },
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-            analyses = {
-              nilness = true,
-              unusedparams = true,
-              unusedwrite = true,
-              useany = true,
-            },
-            usePlaceholders = true,
-            completeUnimported = true,
-            staticcheck = true,
-          },
-        },
-      },
-      vtsls = {
-        filetypes = {
-          'javascript',
-          'javascriptreact',
-          'javascript.jsx',
-          'typescript',
-          'typescriptreact',
-          'typescript.tsx',
-        },
-        settings = {
-          complete_function_calls = true,
-          vtsls = {
-            enableMoveToFileCodeAction = true,
-            autoUseWorkspaceTsdk = true,
-            experimental = {
-              maxInlayHintLength = 30,
-              completion = {
-                enableServerSideFuzzyMatch = true,
-              },
-            },
-          },
-          typescript = {
-            updateImportsOnFileMove = { enabled = 'always' },
-            suggest = {
-              completeFunctionCalls = true,
-            },
-            inlayHints = {
-              enumMemberValues = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
-              parameterNames = { enabled = 'literals' },
-              parameterTypes = { enabled = true },
-              propertyDeclarationTypes = { enabled = true },
-              variableTypes = { enabled = false },
-            },
-          },
-        },
-      },
-    }
-
-    -- Install servers
-    local lsp_mason_packages_to_install = {
-      'gopls', -- Mason: gopls -> lspconfig: gopls
-      'gofumpt',
-      'goimports',
-      'goimports-reviser',
-      'delve',
-      'vtsls',
-      'eslint-lsp',
-      'prettier',
-      'lua-language-server', -- Mason: lua-language-server -> lspconfig: lua_ls
-      'stylua',
-    }
-
-    -- Automatically install servers via mason-tool-installer
-    require('mason-tool-installer').setup { ensure_installed = lsp_mason_packages_to_install }
-
-    for server, config in pairs(language_servers) do
-      -- This handles overriding only values explicitly passed
-      -- by the server configuration above. Useful when disabling
-      -- certain features of an LSP (for example, turning off formatting for ts_ls)
-      config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
-      require('lspconfig')[server].setup(config)
-    end
-  end,
-}
