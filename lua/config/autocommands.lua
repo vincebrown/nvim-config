@@ -13,27 +13,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
   callback = function(event)
-    local lsp_buf = vim.lsp.buf
-    local telescope = require 'telescope.builtin'
-
     local map = function(keys, func, desc, mode)
       mode = mode or 'n'
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
     end
 
-    map('gr', telescope.lsp_references, 'Go to references')
+    map('gr', Snacks.picker.lsp_references, 'Go to references')
 
-    map('gI', telescope.lsp_implementations, 'Go to implementation')
+    map('gI', Snacks.picker.lsp_implementations, 'Go to implementation')
 
-    map('gd', telescope.lsp_definitions, 'Go to definition')
+    map('gd', Snacks.picker.lsp_definitions, 'Go to definition')
 
-    map('gD', lsp_buf.declaration, 'Go to declaration')
+    map('gD', Snacks.picker.lsp_declarations, 'Go to declaration')
 
-    map('gO', telescope.lsp_document_symbols, 'Open document symbols')
-
-    map('gW', telescope.lsp_dynamic_workspace_symbols, 'Open workspace symbols')
-
-    map('gt', telescope.lsp_type_definitions, 'Go to type definitions')
+    map('gt', Snacks.picker.lsp_type_definitions, 'Go to type definitions')
 
     local function client_supports_method(client, method, bufnr)
       return client:supports_method(method, bufnr)

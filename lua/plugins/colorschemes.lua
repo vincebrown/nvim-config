@@ -18,7 +18,6 @@ return {
   },
   { 'rose-pine/neovim', name = 'rose-pine' },
   { 'savq/melange-nvim' },
-  { 'Yazeed1s/oh-lucy.nvim' },
   { 'AhmedAbdulrahman/aylin.vim' },
   { 'rebelot/kanagawa.nvim' },
   {
@@ -29,25 +28,11 @@ return {
   },
   { 'sainnhe/gruvbox-material' },
   { 'sainnhe/everforest' },
-  { 'EdenEast/nightfox.nvim' },
-  { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },
-  { 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = false, priority = 1000 },
   {
     '2nthony/vitesse.nvim',
     dependencies = {
       'tjdevries/colorbuddy.nvim',
     },
-  },
-  {
-    'cdmill/neomodern.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('neomodern').setup {
-        -- optional configuration here
-      }
-      require('neomodern').load()
-    end,
   },
   {
     'vague2k/vague.nvim',

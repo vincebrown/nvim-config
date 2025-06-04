@@ -1,110 +1,110 @@
 return {
-  {
-    'nvim-telescope/telescope.nvim',
-    event = 'VimEnter',
-    branch = '0.1.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
-      { 'nvim-telescope/telescope-ui-select.nvim' },
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-    },
-    config = function()
-      require('telescope').setup {
-        defaults = {
-          initial_mode = 'normal',
-        },
-        extensions = {
-          ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
-          aerial = {
-            col1_width = 5,
-            col2_width = 30,
-            format_symbol = function(symbol_path, filetype)
-              if filetype == 'json' or filetype == 'yaml' then
-                return table.concat(symbol_path, '.')
-              else
-                return symbol_path[#symbol_path]
-              end
-            end,
-            show_columns = 'both',
-          },
-        },
-        pickers = {
-          find_files = require('telescope.themes').get_ivy {
-            initial_mode = 'insert',
-            layout_config = {
-              height = 30,
-            },
-          },
-          oldfiles = require('telescope.themes').get_ivy {
-            layout_config = {
-              height = 30,
-            },
-          },
-          grep_string = {
-            initial_mode = 'insert',
-          },
-          live_grep = {
-            initial_mode = 'insert',
-          },
-          current_buffer_fuzzy_find = {
-            initial_mode = 'insert',
-          },
-          colorscheme = {
-            enable_preview = true,
-          },
-        },
-      }
-
-      -- Enable Telescope extensions if they are installed
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'aerial')
-
-      -- See `:help telescope.builtin`
-      local builtin = require 'telescope.builtin'
-      local set = vim.keymap.set
-
-      set('n', '<leader>ff', builtin.find_files, { desc = 'Search Files' })
-      set('n', '<leader>fr', function()
-        builtin.oldfiles {
-          cwd_only = true,
-        }
-      end, { desc = 'Search Recent Files (cwd only)' })
-      set('n', '<leader>fR', builtin.oldfiles, { desc = 'Search Recent Files' })
-      set('n', '<leader>fg', builtin.git_files, { desc = 'Search Git Files' })
-      set('n', '<leader>fc', builtin.colorscheme, { desc = 'Search Colorschemes' })
-      set('n', '<leader>sb', builtin.current_buffer_fuzzy_find, { desc = 'Search Current Buffer' })
-      set('n', '<leader>sc', ':Telescope aerial<CR>', { desc = 'Search code' })
-      set('n', '<leader>st', builtin.builtin, { desc = 'Search telescope builtin' })
-      set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current word' })
-      set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by grep' })
-      set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search diagnostics' })
-      set('n', '<leader>sr', builtin.resume, { desc = 'Search resume picker' })
-      set('n', '<leader>sh', builtin.help_tags, { desc = 'Search neovim help' })
-      set('n', '<leader>sk', builtin.keymaps, { desc = 'Search keymaps' })
-      set('n', '<leader><leader>', builtin.buffers, { desc = 'Search open buffers' })
-
-      -- It's also possible to pass additional configuration options.
-      --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      set('n', '<leader>s/', function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = 'Seach grep open files' })
-
-      set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = 'Search neovim files' })
-    end,
-  },
+  -- {
+  --   'nvim-telescope/telescope.nvim',
+  --   event = 'VeryLazy',
+  --   branch = '0.1.x',
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --     {
+  --       'nvim-telescope/telescope-fzf-native.nvim',
+  --       build = 'make',
+  --       cond = function()
+  --         return vim.fn.executable 'make' == 1
+  --       end,
+  --     },
+  --     { 'nvim-telescope/telescope-ui-select.nvim' },
+  --     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+  --   },
+  --   config = function()
+  --     -- require('telescope').setup {
+  --     --   defaults = {
+  --     --     initial_mode = 'normal',
+  --     --   },
+  --     --   extensions = {
+  --     --     ['ui-select'] = {
+  --     --       require('telescope.themes').get_dropdown(),
+  --     --     },
+  --     --     aerial = {
+  --     --       col1_width = 5,
+  --     --       col2_width = 30,
+  --     --       format_symbol = function(symbol_path, filetype)
+  --     --         if filetype == 'json' or filetype == 'yaml' then
+  --     --           return table.concat(symbol_path, '.')
+  --     --         else
+  --     --           return symbol_path[#symbol_path]
+  --     --         end
+  --     --       end,
+  --     --       show_columns = 'both',
+  --     --     },
+  --     --   },
+  --     --   pickers = {
+  --     --     find_files = require('telescope.themes').get_ivy {
+  --     --       initial_mode = 'insert',
+  --     --       layout_config = {
+  --     --         height = 30,
+  --     --       },
+  --     --     },
+  --     --     oldfiles = require('telescope.themes').get_ivy {
+  --     --       layout_config = {
+  --     --         height = 30,
+  --     --       },
+  --     --     },
+  --     --     grep_string = {
+  --     --       initial_mode = 'insert',
+  --     --     },
+  --     --     live_grep = {
+  --     --       initial_mode = 'insert',
+  --     --     },
+  --     --     current_buffer_fuzzy_find = {
+  --     --       initial_mode = 'insert',
+  --     --     },
+  --     --     colorscheme = {
+  --     --       enable_preview = true,
+  --     --     },
+  --     --   },
+  --     -- }
+  --
+  --     -- Enable Telescope extensions if they are installed
+  --     -- pcall(require('telescope').load_extension, 'fzf')
+  --     -- pcall(require('telescope').load_extension, 'ui-select')
+  --     -- pcall(require('telescope').load_extension, 'aerial')
+  --
+  --     -- See `:help telescope.builtin`
+  --     -- local builtin = require 'telescope.builtin'
+  --     -- local set = vim.keymap.set
+  --
+  --     -- set('n', '<leader>ff', builtin.find_files, { desc = 'Search Files' })
+  --     -- set('n', '<leader>fr', function()
+  --     --   builtin.oldfiles {
+  --     --     cwd_only = true,
+  --     --   }
+  --     -- end, { desc = 'Search Recent Files (cwd only)' })
+  --     -- set('n', '<leader>fR', builtin.oldfiles, { desc = 'Search Recent Files' })
+  --     -- set('n', '<leader>fg', builtin.git_files, { desc = 'Search Git Files' })
+  --     -- set('n', '<leader>fc', builtin.colorscheme, { desc = 'Search Colorschemes' })
+  --     -- set('n', '<leader>sb', builtin.current_buffer_fuzzy_find, { desc = 'Search Current Buffer' })
+  --     -- set('n', '<leader>sc', ':Telescope aerial<CR>', { desc = 'Search code' })
+  --     -- set('n', '<leader>st', builtin.builtin, { desc = 'Search telescope builtin' })
+  --     -- set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current word' })
+  --     -- set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by grep' })
+  --     -- set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search diagnostics' })
+  --     -- set('n', '<leader>sr', builtin.resume, { desc = 'Search resume picker' })
+  --     -- set('n', '<leader>sh', builtin.help_tags, { desc = 'Search neovim help' })
+  --     -- set('n', '<leader>sk', builtin.keymaps, { desc = 'Search keymaps' })
+  --     -- set('n', '<leader><leader>', builtin.buffers, { desc = 'Search open buffers' })
+  --
+  --     -- It's also possible to pass additional configuration options.
+  --     --  See `:help telescope.builtin.live_grep()` for information about particular keys
+  --     -- set('n', '<leader>s/', function()
+  --     --   builtin.live_grep {
+  --     --     grep_open_files = true,
+  --     --     prompt_title = 'Live Grep in Open Files',
+  --     --   }
+  --     -- end, { desc = 'Seach grep open files' })
+  --
+  --     -- set('n', '<leader>sn', function()
+  --     --   builtin.find_files { cwd = vim.fn.stdpath 'config' }
+  --     -- end, { desc = 'Search neovim files' })
+  --   end,
+  -- },
 }
