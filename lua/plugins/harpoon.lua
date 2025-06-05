@@ -6,27 +6,18 @@ return {
     config = function()
       local harpoon = require 'harpoon'
 
-      harpoon.setup {}
+      harpoon.setup()
 
-      -- local conf = require('telescope.config').values
-      --
-      -- local function toggle_telescope(harpoon_files)
-      --   local file_paths = {}
-      --   for _, item in ipairs(harpoon_files.items) do
-      --     table.insert(file_paths, item.value)
-      --   end
-      --
-      --   require('telescope.pickers')
-      --     .new({}, {
-      --       prompt_title = 'Harpoon',
-      --       finder = require('telescope.finders').new_table {
-      --         results = file_paths,
-      --       },
-      --       previewer = conf.file_previewer {},
-      --       sorter = conf.generic_sorter {},
-      --     })
-      --     :find()
-      -- end
+      local function get_harpoon_picker_data()
+        local file_paths = {}
+        for _, item in ipairs(harpoon:list().items) do
+          table.insert(file_paths, {
+            text = item.value,
+            file = item.value,
+          })
+        end
+        return file_paths
+      end
 
       vim.keymap.set('n', '<leader>ha', function()
         harpoon:list():add()
@@ -44,9 +35,16 @@ return {
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end, { desc = 'Harpoon quick menu' })
 
-      -- vim.keymap.set('n', '<leader>ht', function()
-      --   toggle_telescope(harpoon:list())
-      -- end, { desc = '[H]arpoon [T]elescope' })
+      vim.keymap.set('n', '<leader>hp', function()
+        Snacks.picker {
+          finder = get_harpoon_picker_data,
+          title = 'Harpoon',
+          focus = 'list',
+          layout = {
+            preset = 'select',
+          },
+        }
+      end, { desc = '[H]arpoon [T]elescope' })
 
       vim.keymap.set('n', '<leader>hj', function()
         harpoon:list():select(1)

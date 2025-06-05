@@ -37,7 +37,7 @@ return {
     },
     icons = {
       files = {
-        enabled = true, -- show file icons
+        enabled = true,
         dir = '󰉋 ',
         dir_open = '󰝰 ',
         file = '󰈔 ',
@@ -123,7 +123,7 @@ return {
       desc = 'Command History',
     },
     {
-      '<leader>n',
+      '<leader>sn',
       function()
         Snacks.picker.notifications()
       end,
