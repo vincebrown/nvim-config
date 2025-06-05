@@ -1,4 +1,4 @@
-vim.lsp.enable { 'vtsls', 'gopls', 'lua_ls' }
+vim.lsp.enable { 'vtsls', 'gopls', 'lua_ls', 'ruby_lsp' }
 
 vim.diagnostic.config {
   severity_sort = true,
