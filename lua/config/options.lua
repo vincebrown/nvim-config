@@ -22,6 +22,12 @@ o.number = true
 o.numberwidth = 2
 o.ruler = false
 
+-- Folds
+o.foldcolumn = '1'
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.foldenable = true
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 opt.mouse = 'a'
 

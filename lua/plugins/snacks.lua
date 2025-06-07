@@ -8,6 +8,8 @@ return {
     bufdelete = { enabled = true },
     dim = { enabled = true },
     indent = { enabled = false },
+    scope = { enabled = true },
+    statuscolumn = { enabled = true },
     lazygit = { enabled = true, configure = true },
     scroll = { enabled = true },
     win = { enabled = true },

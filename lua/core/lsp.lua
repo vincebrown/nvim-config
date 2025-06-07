@@ -1,3 +1,15 @@
+-- Configure global capabilities for all LSP servers
+vim.lsp.config('*', {
+  capabilities = {
+    textDocument = {
+      foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      },
+    },
+  },
+})
+
 vim.lsp.enable { 'vtsls', 'gopls', 'lua_ls', 'ruby_lsp' }
 
 vim.diagnostic.config {
