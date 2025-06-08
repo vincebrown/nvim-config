@@ -49,6 +49,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.buf.code_action {
           apply = true,
           context = {
+            ---@diagnostic disable-next-line: assign-type-mismatch
             only = { 'source.addMissingImports.ts' },
             diagnostics = {},
           },
@@ -59,6 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.buf.code_action {
           apply = true,
           context = {
+            ---@diagnostic disable-next-line: assign-type-mismatch
             only = { 'source.removeUnused.ts' },
             diagnostics = {},
           },
@@ -69,6 +71,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.buf.code_action {
           apply = true,
           context = {
+            ---@diagnostic disable-next-line: assign-type-mismatch
             only = { 'source.fixAll.ts' },
             diagnostics = {},
           },
@@ -110,6 +113,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
       end, 'Toggle Inlay Hints')
     end
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = vim.api.nvim_create_augroup('trim-whitespace', { clear = true }),
+  callback = function()
+    require('mini.trailspace').trim()
   end,
 })
 
