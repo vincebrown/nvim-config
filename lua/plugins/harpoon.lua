@@ -44,7 +44,7 @@ return {
             preset = 'select',
           },
         }
-      end, { desc = '[H]arpoon [T]elescope' })
+      end, { desc = 'Harpoon Picker' })
 
       vim.keymap.set('n', '<leader>hj', function()
         harpoon:list():select(1)

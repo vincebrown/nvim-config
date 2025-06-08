@@ -14,34 +14,38 @@ return {
       nerd_font_variant = 'mono',
     },
     completion = {
+      -- ghost_text = { enabled = true },
       menu = {
+        border = 'rounded',
         draw = {
           -- We don't need label_description now because label and label_description are already
           -- combined together in label by colorful-menu.nvim.
           columns = { { 'kind_icon' }, { 'label', gap = 1 } },
           components = {
-            label = {
-              width = { fill = true, max = 60 },
+            kind_icon = {
               text = function(ctx)
-                local highlights_info = require('colorful-menu').blink_highlights(ctx)
-                if highlights_info ~= nil then
-                  -- Or you want to add more item to label
-                  return highlights_info.label
-                else
-                  return ctx.label
-                end
+                local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+                return kind_icon
+              end,
+              -- (optional) use highlights from mini.icons
+              highlight = function(ctx)
+                local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                return hl
+              end,
+            },
+            kind = {
+              -- (optional) use highlights from mini.icons
+              highlight = function(ctx)
+                local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                return hl
+              end,
+            },
+            label = {
+              text = function(ctx)
+                return require('colorful-menu').blink_components_text(ctx)
               end,
               highlight = function(ctx)
-                local highlights = {}
-                local highlights_info = require('colorful-menu').blink_highlights(ctx)
-                if highlights_info ~= nil then
-                  highlights = highlights_info.highlights
-                end
-                for _, idx in ipairs(ctx.label_matched_indices) do
-                  table.insert(highlights, { idx, idx + 1, group = 'BlinkCmpLabelMatch' })
-                end
-                -- Do something else
-                return highlights
+                return require('colorful-menu').blink_components_highlight(ctx)
               end,
             },
           },
@@ -52,19 +56,13 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'nerdfont' },
+      default = { 'lsp', 'path', 'snippets' },
       per_filetype = {
         sql = { 'snippets', 'dadbod', 'buffer' },
       },
       -- add vim-dadbod-completion to your completion providers
       providers = {
         dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
-        nerdfont = {
-          module = 'blink-nerdfont',
-          name = 'Nerd Fonts',
-          score_offset = 15, -- Tune by preference
-          opts = { insert = true }, -- Insert nerdfont icon (default) or complete its name
-        },
       },
     },
     fuzzy = { implementation = 'prefer_rust_with_warning' },
