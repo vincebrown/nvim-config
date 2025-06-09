@@ -3,9 +3,55 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
+
     config = function()
       require('catppuccin').setup {
         transparent_background = true,
+        integrations = {
+          hop = true,
+          harpoon = true,
+          mason = true,
+          neotest = true,
+          notify = true,
+          noice = true,
+          dadbod_ui = true,
+          gitsigns = {
+            enabled = true,
+          },
+          snacks = {
+            enabled = true,
+          },
+          native_lsp = {
+            enabled = true,
+            virtual_text = {
+              errors = { 'italic' },
+              hints = { 'italic' },
+              warnings = { 'italic' },
+              information = { 'italic' },
+              ok = { 'italic' },
+            },
+            underlines = {
+              errors = { 'underline' },
+              hints = { 'underline' },
+              warnings = { 'underline' },
+              information = { 'underline' },
+              ok = { 'underline' },
+            },
+            inlay_hints = {
+              background = true,
+            },
+          },
+          lsp_trouble = true,
+          which_key = true,
+        },
+        custom_highlights = function(colors)
+          return {
+            Comment = { fg = colors.overlay1 },
+            CmpBorder = { fg = colors.surface0 },
+            Pmenu = { bg = colors.none },
+            LineNr = { fg = colors.surface2 },
+          }
+        end,
       }
     end,
   },

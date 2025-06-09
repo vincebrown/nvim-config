@@ -81,7 +81,7 @@ return {
     { '<leader>fb', function() Snacks.picker.buffers() end, desc = 'Buffers' },
     { '<leader>fc', function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, desc = 'Find Config File' },
     { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find Files' },
-    { '<leader>fg', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
+    {'<leader>fg', function() Snacks.picker.git_files() end, desc = 'Find Git Files'},
     { '<leader>fp', function() Snacks.picker.projects() end, desc = 'Projects' },
     { '<leader>fr', function() Snacks.picker.recent { filter = { cwd = true }, } end, desc = 'Recent (cwd)' },
     { '<leader>fR', function() Snacks.picker.recent() end, desc = 'Recent (all)' },

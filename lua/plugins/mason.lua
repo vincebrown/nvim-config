@@ -1,41 +1,40 @@
 return {
-  { "mason-org/mason.nvim", opts = {} },
   {
-  'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'mason-org/mason.nvim',
     opts = {
-  ensure_installed = {
-    'vtsls',
-    'gopls', -- Mason: gopls -> lspconfig: gopls
-    'lua-language-server', -- Mason: lua-language-server -> lspconfig: lua_ls
-    'gofumpt',
-    'goimports',
-    'goimports-reviser',
-    'delve',
-    'eslint-lsp',
-    'prettier',
-    'stylua',
+      ui = {
+        border = 'rounded',
+        icons = {
+          ---@since 1.0.0
+          -- The list icon to use for installed packages.
+          package_installed = '',
+          ---@since 1.0.0
+          -- The list icon to use for packages that are installing, or queued for installation.
+          package_pending = '◍',
+          ---@since 1.0.0
+          -- The list icon to use for packages that are not installed.
+          package_uninstalled = '◍',
+        },
+      },
+    },
   },
-    }
-  }
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    opts = {
+      ensure_installed = {
+        'vtsls',
+        'gopls',
+        'lua-language-server', -- Mason: lua-language-server -> lspconfig: lua_ls
+        'gofumpt',
+        'goimports',
+        'goimports-reviser',
+        'gomodifytags',
+        'impl',
+        'delve',
+        'eslint-lsp',
+        'prettier',
+        'stylua',
+      },
+    },
+  },
 }
--- return {
---   {
---     "mason-org/mason.nvim",
---     opts = {}
--- },
---   {
---   'WhoIsSethDaniel/mason-tool-installer.nvim',
---   ensure_installed = {
---     'vtsls',
---     'gopls', -- Mason: gopls -> lspconfig: gopls
---     'lua-language-server', -- Mason: lua-language-server -> lspconfig: lua_ls
---     'gofumpt',
---     'goimports',
---     'goimports-reviser',
---     'delve',
---     'eslint-lsp',
---     'prettier',
---     'stylua',
---   },
---   },
--- }
