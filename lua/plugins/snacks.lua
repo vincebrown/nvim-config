@@ -7,7 +7,11 @@ return {
   opts = {
     bufdelete = { enabled = true },
     dim = { enabled = true },
-    indent = { enabled = false },
+    indent = {
+      enabled = true,
+      only_scope = true,
+      only_current = true,
+    },
     scope = { enabled = true },
     statuscolumn = { enabled = true },
     lazygit = { enabled = true, configure = true },
@@ -90,7 +94,25 @@ return {
     { '<leader>gb', function() Snacks.picker.git_branches() end, desc = 'Git Branches' },
     { '<leader>gl', function() Snacks.picker.git_log() end, desc = 'Git Log' },
     { '<leader>gL', function() Snacks.picker.git_log_line() end, desc = 'Git Log Line' },
-    { '<leader>gs', function() Snacks.picker.git_status() end, desc = 'Git Status' },
+    {
+      '<leader>gs',
+      function()
+        Snacks.picker.git_status({
+          focus ="list",
+          layout = {
+            preset = 'dropdown',
+            layout = {
+              width = 0.8,
+              height = 0.8,
+              preview = {
+                height = 0.8
+              }
+            }
+          },
+        })
+      end,
+      desc = 'Git Status'
+    },
     { '<leader>gS', function() Snacks.picker.git_stash() end, desc = 'Git Stash' },
     { '<leader>gd', function() Snacks.picker.git_diff() end, desc = 'Git Diff (Hunks)' },
     { '<leader>gf', function() Snacks.picker.git_log_file() end, desc = 'Git Log File' },

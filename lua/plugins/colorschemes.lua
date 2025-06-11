@@ -50,6 +50,8 @@ return {
             CmpBorder = { fg = colors.surface0 },
             Pmenu = { bg = colors.none },
             LineNr = { fg = colors.surface2 },
+            SnacksIndent = { fg = colors.surface0 },
+            SnacksIndentScope = { fg = colors.surface1 },
           }
         end,
       }

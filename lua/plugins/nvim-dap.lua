@@ -33,7 +33,7 @@ return {
       }
 
       vim.keymap.set('n', '<space>bp', dap.toggle_breakpoint)
-      vim.keymap.set('n', '<space>gb', dap.run_to_cursor)
+      vim.keymap.set('n', '<space>gc', dap.run_to_cursor)
 
       -- Eval var under cursor
       vim.keymap.set('n', '<space>?', function()

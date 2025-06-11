@@ -1,8 +1,6 @@
 return {
   'gbprod/yanky.nvim',
-  recommended = true,
   desc = 'Better Yank/Paste',
-  event = 'LazyFile',
   dependencies = { 'folke/snacks.nvim' },
   opts = {
     preserve_cursor_position = {
