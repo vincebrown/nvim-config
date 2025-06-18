@@ -4,6 +4,9 @@ return {
     event = 'VeryLazy',
     enabled = true,
     opts = {
+      popupmenu = {
+        enabled = true,
+      },
       lsp = {
         override = {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,

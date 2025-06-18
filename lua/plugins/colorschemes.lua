@@ -31,11 +31,10 @@ return {
               ok = { 'italic' },
             },
             underlines = {
-              errors = { 'underline' },
-              hints = { 'underline' },
-              warnings = { 'underline' },
-              information = { 'underline' },
-              ok = { 'underline' },
+              errors = { 'undercurl' },
+              hints = { 'undercurl' },
+              warnings = { 'undercurl' },
+              information = { 'undercurl' },
             },
             inlay_hints = {
               background = true,
@@ -43,6 +42,10 @@ return {
           },
           lsp_trouble = true,
           which_key = true,
+          semantic_tokens = true,
+          treesitter = true,
+          treesitter_context = true,
+          notify = true,
         },
         custom_highlights = function(colors)
           return {

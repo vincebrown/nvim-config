@@ -15,3 +15,8 @@ set('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit' })
 
 set('n', '<leader>/', 'gcc', { desc = 'Toggle comment', remap = true })
 set('v', '<leader>/', 'gc', { desc = 'Toggle comment', remap = true })
+
+-- Diagnostics
+set('n', '<C-w><C-d>', function()
+  vim.diagnostic.open_float { max_width = 70 }
+end, { desc = 'Open diagnostic float' })

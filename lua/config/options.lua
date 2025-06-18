@@ -14,6 +14,9 @@ opt.swapfile = false
 
 g.have_nerd_font = true
 
+-- views can only be fully collapsed with the global statusline
+opt.laststatus = 3
+
 -- Make line numbers default
 opt.number = true
 opt.relativenumber = true

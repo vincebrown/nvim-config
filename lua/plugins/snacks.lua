@@ -6,7 +6,7 @@ return {
   ---@type snacks.Config
   opts = {
     bufdelete = { enabled = true },
-    dim = { enabled = true },
+    dim = { enabled = false },
     indent = {
       enabled = true,
       only_scope = true,
@@ -91,7 +91,8 @@ return {
     { '<leader>fR', function() Snacks.picker.recent() end, desc = 'Recent (all)' },
 
     -- Git
-    { '<leader>gb', function() Snacks.picker.git_branches() end, desc = 'Git Branches' },
+    { '<leader>gbr', function() Snacks.picker.git_branches() end, desc = 'Git Branches' },
+    {'<leader>gbl', function() Snacks.git.blame_line() end, desc = 'Git blame line'},
     { '<leader>gl', function() Snacks.picker.git_log() end, desc = 'Git Log' },
     { '<leader>gL', function() Snacks.picker.git_log_line() end, desc = 'Git Log Line' },
     {
@@ -104,10 +105,7 @@ return {
             layout = {
               width = 0.8,
               height = 0.8,
-              preview = {
-                height = 0.8
-              }
-            }
+            },
           },
         })
       end,
