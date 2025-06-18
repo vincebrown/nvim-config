@@ -55,6 +55,10 @@ return {
             LineNr = { fg = colors.surface2 },
             SnacksIndent = { fg = colors.surface0 },
             SnacksIndentScope = { fg = colors.surface1 },
+            TinyInlineDiagnosticVirtualTextError = { fg = colors.red },
+            TinyInlineDiagnosticVirtualTextWarn = { fg = colors.yellow },
+            TinyInlineDiagnosticVirtualTextInfo = { fg = colors.sapphire },
+            TinyInlineDiagnosticVirtualTextHint = { fg = colors.lavender },
           }
         end,
       }
