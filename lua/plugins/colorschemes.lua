@@ -59,6 +59,7 @@ return {
             TinyInlineDiagnosticVirtualTextWarn = { fg = colors.yellow },
             TinyInlineDiagnosticVirtualTextInfo = { fg = colors.sapphire },
             TinyInlineDiagnosticVirtualTextHint = { fg = colors.lavender },
+            RenderMarkdownCode = { bg = colors.base },
           }
         end,
       }

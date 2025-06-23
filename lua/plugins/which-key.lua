@@ -23,7 +23,7 @@ return {
       },
     }
     wk.add {
-      { '<leader>f', group = 'File' },
+      { '<leader>f', group = 'Find' },
       { '<leader>s', group = 'Search' },
       { '<leader>b', group = 'Buffer' },
       { '<leader>c', group = 'Code' },

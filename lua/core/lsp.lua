@@ -2,12 +2,16 @@
 vim.lsp.config('*', {
   capabilities = {
     textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      },
       foldingRange = {
         dynamicRegistration = false,
         lineFoldingOnly = true,
       },
     },
   },
+  root_markers = { '.git' },
 })
 
 vim.lsp.enable { 'vtsls', 'gopls', 'lua_ls', 'ruby_lsp' }
