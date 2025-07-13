@@ -20,3 +20,18 @@ set('v', '<leader>/', 'gc', { desc = 'Toggle comment', remap = true })
 set('n', '<C-w><C-d>', function()
   vim.diagnostic.open_float { max_width = 70 }
 end, { desc = 'Open diagnostic float' })
+
+-- Configuration reload
+set('n', '<leader>rr', function()
+  -- Clear Lua package cache
+  for name, _ in pairs(package.loaded) do
+    if name:match '^config' or name:match '^plugins' then
+      package.loaded[name] = nil
+    end
+  end
+
+  -- Reload init.lua
+  dofile(vim.env.MYVIMRC or (vim.fn.stdpath 'config' .. '/init.lua'))
+
+  Snacks.notify.info 'Neovim configuration reloaded!'
+end, { desc = 'Reload Neovim configuration' })

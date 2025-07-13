@@ -27,11 +27,13 @@ return {
       { '<leader>s', group = 'Search' },
       { '<leader>b', group = 'Buffer' },
       { '<leader>c', group = 'Code' },
-      { '<leader>h', group = 'Harpoon' },
+      { '<leader>d', group = 'Debug' },
+      { '<leader>g', group = 'Git' },
+      { '<leader>h', group = 'Harpoon/Hop' },
       { '<leader>t', group = 'Test' },
       { '<leader>u', group = 'Toggle' },
+      { '<leader>v', group = 'View' },
       { '<leader>x', group = 'Trouble' },
-      { '<leader>g', group = 'Git' },
     }
   end,
 }

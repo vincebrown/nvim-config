@@ -79,35 +79,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end, 'Typescript remove unused imports')
     end
 
-    -- The following two autocommands are used to highlight references of the
-    -- word under your cursor when your cursor rests there for a little while.
-    -- When you move your cursor, the highlights will be cleared (the second autocommand).
-    if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-      local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
-
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        buffer = event.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.document_highlight,
-      })
-
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        buffer = event.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.clear_references,
-      })
-
-      -- We create another autocommand bound to LspDetach to clear this allows us to have multiple buffers opened on the
-      -- same file and not have them clearing eachother like they would if we set clear = true on the highlight_augroup
-      vim.api.nvim_create_autocmd('LspDetach', {
-        group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
-        callback = function(event2)
-          vim.lsp.buf.clear_references()
-          vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
-        end,
-      })
-    end
-
     if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
       map('<leader>th', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })

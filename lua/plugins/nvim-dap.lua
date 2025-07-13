@@ -32,20 +32,20 @@ return {
         end,
       }
 
-      vim.keymap.set('n', '<space>dbp', dap.toggle_breakpoint)
-      vim.keymap.set('n', '<space>dra', dap.run_to_cursor)
+      vim.keymap.set('n', '<leader>dbp', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
+      vim.keymap.set('n', '<leader>dra', dap.run_to_cursor, { desc = 'Run to cursor' })
 
       -- Eval var under cursor
-      vim.keymap.set('n', '<space>dbe', function()
+      vim.keymap.set('n', '<leader>dbe', function()
         require('dapui').eval(nil, { enter = true })
-      end)
+      end, { desc = 'Evaluate expression' })
 
-      vim.keymap.set('n', '<space>dbc', dap.continue)
-      vim.keymap.set('n', '<space>dsi', dap.step_into)
-      vim.keymap.set('n', '<space>dso', dap.step_over)
-      vim.keymap.set('n', '<space>dsO', dap.step_out)
-      vim.keymap.set('n', '<space>dsb', dap.step_back)
-      vim.keymap.set('n', '<space>dbr', dap.restart)
+      vim.keymap.set('n', '<leader>dbc', dap.continue, { desc = 'Continue' })
+      vim.keymap.set('n', '<leader>dsi', dap.step_into, { desc = 'Step into' })
+      vim.keymap.set('n', '<leader>dso', dap.step_over, { desc = 'Step over' })
+      vim.keymap.set('n', '<leader>dsO', dap.step_out, { desc = 'Step out' })
+      vim.keymap.set('n', '<leader>dsb', dap.step_back, { desc = 'Step back' })
+      vim.keymap.set('n', '<leader>dbr', dap.restart, { desc = 'Restart' })
 
       dap.listeners.before.attach.dapui_config = function()
         ui.open()

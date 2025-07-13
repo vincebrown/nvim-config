@@ -29,6 +29,8 @@ return {
       -- highlight trailing spaces
       require('mini.trailspace').setup()
 
+      require('mini.cursorword').setup()
+
       -- Move lines in N an V mode
       require('mini.move').setup {
         mappings = {

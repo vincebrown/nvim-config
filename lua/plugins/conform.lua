@@ -1,5 +1,5 @@
 return {
-  { -- Autoformat
+  {
     'stevearc/conform.nvim',
     lazy = false,
     keys = {
@@ -23,13 +23,38 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        javascript = { 'prettier' },
-        typescript = { 'prettier' },
-        javascriptreact = { 'prettier' },
-        typescriptreact = { 'prettier' },
-        graphql = { 'prettier' },
-        json = { 'prettier' },
+        javascript = { 'biome', 'biome-organize-imports', 'prettier' },
+        typescript = { 'biome', 'biome-organize-imports', 'prettier' },
+        javascriptreact = { 'biome', 'biome-organize-imports', 'prettier' },
+        typescriptreact = { 'biome', 'biome-organize-imports', 'prettier' },
+        graphql = { 'biome', 'prettier' },
+        json = { 'biome', 'prettier' },
         go = { 'goimports-reviser', 'gofumpt' },
+      },
+      -- only run biome or prettier if there are config files in project
+      formatters = {
+        biome = {
+          condition = function(self, ctx)
+            return vim.fs.root(ctx.dirname, { 'biome.json', 'biome.jsonc' })
+          end,
+        },
+        ['biome-organize-imports'] = {
+          condition = function(self, ctx)
+            return vim.fs.root(ctx.dirname, { 'biome.json', 'biome.jsonc' })
+          end,
+        },
+        prettier = {
+          condition = function(self, ctx)
+            return vim.fs.root(ctx.dirname, {
+              '.prettierrc',
+              '.prettierrc.json',
+              '.prettierrc.yml',
+              '.prettierrc.yaml',
+              '.prettierrc.js',
+              'prettier.config.js',
+            })
+          end,
+        },
       },
     },
   },

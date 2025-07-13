@@ -8,12 +8,12 @@ return {
   opts = {
     keymap = { preset = 'default' },
     signature = { enabled = false, window = { border = 'padded' } },
-    documentation = { auto_show = true, window = { border = 'rounded' } },
     cmdline = { enabled = true },
     appearance = {
       nerd_font_variant = 'mono',
     },
     completion = {
+      documentation = { auto_show = true, window = { border = 'rounded' } },
       -- ghost_text = { enabled = true },
       menu = {
         border = 'rounded',
