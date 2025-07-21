@@ -13,6 +13,7 @@ set('n', '<C-k>', '<C-w>k', { desc = 'Switch window up' })
 set('n', '<leader>w', '<cmd>silent! w<CR>', { desc = 'Write' })
 set('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit' })
 
+-- Comments
 set('n', '<leader>/', 'gcc', { desc = 'Toggle comment', remap = true })
 set('v', '<leader>/', 'gc', { desc = 'Toggle comment', remap = true })
 

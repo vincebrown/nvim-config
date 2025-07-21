@@ -25,6 +25,7 @@ return {
         'vtsls',
         'gopls',
         'lua-language-server', -- Mason: lua-language-server -> lspconfig: lua_ls
+        'json-lsp',
         'gofumpt',
         'goimports',
         'goimports-reviser',
