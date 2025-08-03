@@ -87,6 +87,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- Trim trailing space
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = vim.api.nvim_create_augroup('trim-whitespace', { clear = true }),
   callback = function()
@@ -135,5 +136,15 @@ vim.api.nvim_create_autocmd('LspProgress', {
         notif.icon = #progress[client.id] == 0 and ' ' or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
       end,
     })
+  end,
+})
+
+-- Close certain filetypes with q
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('close-with-q', { clear = true }),
+  pattern = { 'help', 'man', 'qf', 'lspinfo', 'checkhealth' },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
   end,
 })

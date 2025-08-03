@@ -17,7 +17,7 @@ return {
       format_on_save = function(bufnr)
         local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
+          timeout_ms = 1500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
@@ -29,6 +29,7 @@ return {
         typescriptreact = { 'biome', 'biome-organize-imports', 'prettier' },
         graphql = { 'biome', 'prettier' },
         json = { 'biome', 'prettier' },
+        ruby = { 'rubocop' },
         go = { 'goimports-reviser', 'gofumpt' },
       },
       -- only run biome or prettier if there are config files in project

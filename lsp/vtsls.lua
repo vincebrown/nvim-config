@@ -33,6 +33,10 @@ return {
       suggest = {
         completeFunctionCalls = true,
       },
+      preferences = {
+        importModuleSpecifier = 'relative',
+        importModuleSpecifierEnding = 'minimal',
+      },
       inlayHints = {
         enumMemberValues = { enabled = true },
         functionLikeReturnTypes = { enabled = true },
@@ -50,4 +54,3 @@ return {
     },
   }),
 }
-

@@ -34,5 +34,7 @@ set('n', '<leader>rr', function()
   -- Reload init.lua
   dofile(vim.env.MYVIMRC or (vim.fn.stdpath 'config' .. '/init.lua'))
 
-  Snacks.notify.info 'Neovim configuration reloaded!'
+  Snacks.notify.info('Neovim configuration', { title = 'Reloaded' })
 end, { desc = 'Reload Neovim configuration' })
+
+set('n', 'yp', '<cmd>YankPath<cr>', { desc = 'Yank Path' })

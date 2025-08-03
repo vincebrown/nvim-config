@@ -7,6 +7,7 @@ return {
   opts = {
     bufdelete = { enabled = true },
     dim = { enabled = false },
+
     indent = {
       enabled = true,
       only_scope = true,
@@ -19,7 +20,12 @@ return {
     win = { enabled = true },
     notifier = {
       enabled = true,
-      timeout = 4000,
+      timeout = 3000,
+      icons = {
+        info = ' ',
+        error = ' ',
+        warn = ' ',
+      },
     },
     dashboard = {
       enabled = true,

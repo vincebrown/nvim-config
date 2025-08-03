@@ -26,9 +26,6 @@ return {
       -- commenting out code
       require('mini.comment').setup()
 
-      -- highlight trailing spaces
-      require('mini.trailspace').setup()
-
       require('mini.cursorword').setup()
 
       -- Move lines in N an V mode

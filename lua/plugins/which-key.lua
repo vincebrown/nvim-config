@@ -14,6 +14,7 @@ return {
     local wk = require 'which-key'
     wk.setup {
       preset = 'modern',
+      delay = 500,
       layout = {
         width = { min = 20 }, -- min and max width of the columns
         spacing = 5, -- spacing between columns
