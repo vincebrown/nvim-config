@@ -402,22 +402,6 @@ return {
             }
           end,
         },
-        custom_highlights = function(colors)
-          return {
-            Comment = { fg = colors.overlay1 },
-            CmpBorder = { fg = colors.surface0 },
-            Pmenu = { bg = colors.none },
-            Visual = { bg = colors.lavender },
-            LineNr = { fg = colors.surface2 },
-            SnacksIndent = { fg = colors.surface0 },
-            SnacksIndentScope = { fg = colors.surface1 },
-            TinyInlineDiagnosticVirtualTextError = { fg = colors.red },
-            TinyInlineDiagnosticVirtualTextWarn = { fg = colors.yellow },
-            TinyInlineDiagnosticVirtualTextInfo = { fg = colors.sapphire },
-            TinyInlineDiagnosticVirtualTextHint = { fg = colors.lavender },
-            RenderMarkdownCode = { bg = colors.base },
-          }
-        end,
       }
     end,
   },
@@ -439,7 +423,9 @@ return {
     opts = {},
   },
   { 'sainnhe/gruvbox-material' },
-  { 'sainnhe/everforest' },
+  { 'sainnhe/everforest', opts = {
+    transparent_background = 2,
+  } },
   {
     '2nthony/vitesse.nvim',
     dependencies = {
