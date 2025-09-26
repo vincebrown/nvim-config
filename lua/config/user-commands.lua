@@ -1,5 +1,7 @@
--- Debug Linters and formatters attached to current buffer
-vim.api.nvim_create_user_command('LintFormatInfo', function()
+--- Debug linters and formatters attached to current buffer
+--- Displays information about configured linters and available formatters
+--- for the current buffer's filetype via Snacks notification
+local function lint_format_info()
   local ft = vim.bo.filetype
   local linters = require('lint').linters_by_ft[ft] or {}
   local formatters = require('conform').list_formatters(0)
@@ -31,10 +33,15 @@ vim.api.nvim_create_user_command('LintFormatInfo', function()
   end
 
   Snacks.notify.info(table.concat(info, '\n'), { title = 'Lint & Format Info' })
-end, {})
+end
 
--- Copy file path relative to project root to clipboard
-vim.api.nvim_create_user_command('YankPath', function()
+vim.api.nvim_create_user_command('LintFormatInfo', lint_format_info, { desc = 'Show linters and formatters for current buffer' })
+
+--- Copy file path relative to project root to clipboard
+--- If in a git repository, copies the file path relative to git root
+--- Otherwise falls back to copying just the filename
+--- Uses the '+' register (system clipboard)
+local function yank_path()
   local path = vim.fn.expand '%:p'
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
 
@@ -48,8 +55,14 @@ vim.api.nvim_create_user_command('YankPath', function()
     vim.fn.setreg('+', filename)
     Snacks.notify.info('Copied: ' .. filename .. ' (not in git repo)', { title = 'File Path' })
   end
-end, {})
+end
 
+vim.api.nvim_create_user_command('YankPath', yank_path, { desc = 'Copy file path relative to git root to clipboard' })
+
+--- Restart all LSP clients for a buffer
+--- Stops all LSP clients attached to the buffer and re-edits the file
+--- to trigger LSP reattachment
+--- @param bufnr? number Buffer number (defaults to current buffer)
 local function restart_lsp(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   local clients = vim.lsp.get_clients { bufnr = bufnr }
@@ -63,10 +76,12 @@ local function restart_lsp(bufnr)
   end, 100)
 end
 
-vim.api.nvim_create_user_command('LspRestart', function()
-  restart_lsp()
-end, {})
+vim.api.nvim_create_user_command('LspRestart', restart_lsp, { desc = 'Restart all LSP clients for current buffer' })
 
+--- Display detailed LSP status information
+--- Shows all LSP clients attached to current buffer including
+--- client names, root directories, filetypes, and capabilities
+--- Displays information via Snacks notification with extended timeout
 local function lsp_status()
   local bufnr = vim.api.nvim_get_current_buf()
   local clients = vim.lsp.get_clients { bufnr = bufnr }
@@ -130,3 +145,32 @@ local function lsp_status()
 end
 
 vim.api.nvim_create_user_command('LspStatus', lsp_status, { desc = 'Show detailed LSP status' })
+
+--- Reload Neovim configuration completely
+--- Saves all modified buffers, clears Lua package cache for config modules,
+--- and restarts Lazy with change detection to reload the configuration
+--- Provides comprehensive configuration reload without restarting Neovim
+local function reload_nvim_config()
+  -- Save all modified buffers
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].modified then
+      vim.api.nvim_buf_call(buf, function()
+        vim.cmd 'write'
+      end)
+    end
+  end
+
+  -- Clear Lua package cache for config modules
+  for name, _ in pairs(package.loaded) do
+    if name:match '^config' or name:match '^plugins' or name:match '^lsp' or name:match '^core' then
+      package.loaded[name] = nil
+    end
+  end
+
+  -- Force Lazy's change detection to trigger a reload
+  vim.api.nvim_exec_autocmds('User', { pattern = 'LazyReload' })
+
+  Snacks.notify.info('Configuration reloaded successfully', { title = 'Reload Complete' })
+end
+
+vim.api.nvim_create_user_command('ReloadNvimConfig', reload_nvim_config, { desc = 'Reload Neovim Configuration' })

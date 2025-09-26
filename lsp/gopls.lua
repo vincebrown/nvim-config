@@ -1,12 +1,12 @@
-local blinkCapabilities = require 'blink.cmp'
+local utils = require 'core.utils'
 
+---@class GoplsCapabilities : lsp.ClientCapabilities
+---@field semanticTokensProvider table?
+
+---@return GoplsCapabilities
 local function make_gopls_capabilities()
-  local base_capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), blinkCapabilities.get_lsp_capabilities(), {
-    fileOperations = {
-      didRename = true,
-      willRename = true,
-    },
-  })
+  ---@type GoplsCapabilities
+  local base_capabilities = utils.create_lsp_capabilities()
 
   -- workaround for gopls not supporting semanticTokensProvider
   -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
@@ -26,11 +26,13 @@ local function make_gopls_capabilities()
   return base_capabilities
 end
 
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'gopls' },
   filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
   root_markers = { 'go.mod', 'go.work', '.git' },
   single_file_support = true,
+  ---@type lsp.LSPObject
   settings = {
     gopls = {
       gofumpt = true,
@@ -65,5 +67,6 @@ return {
       semanticTokens = true,
     },
   },
+  ---@type GoplsCapabilities
   capabilities = make_gopls_capabilities(),
 }

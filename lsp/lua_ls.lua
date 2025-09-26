@@ -1,5 +1,6 @@
-local blink = require 'blink.cmp'
+local utils = require 'core.utils'
 
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
@@ -15,6 +16,7 @@ return {
   },
   single_file_support = true,
   log_level = vim.lsp.protocol.MessageType.Warning,
+  ---@type lsp.LSPObject
   settings = {
     Lua = {
       completion = {
@@ -36,10 +38,6 @@ return {
       },
     },
   },
-  capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), blink.get_lsp_capabilities(), {
-    fileOperations = {
-      didRename = true,
-      willRename = true,
-    },
-  }),
+  ---@type lsp.ClientCapabilities
+  capabilities = utils.create_lsp_capabilities(),
 }

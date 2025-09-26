@@ -1,5 +1,6 @@
-local blink = require 'blink.cmp'
+local utils = require 'core.utils'
 
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'vtsls', '--stdio' },
   filetypes = {
@@ -16,6 +17,7 @@ return {
     '.git',
   },
   single_file_support = true,
+  ---@type lsp.LSPObject
   settings = {
     complete_function_calls = true,
     vtsls = {
@@ -47,10 +49,6 @@ return {
       },
     },
   },
-  capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), blink.get_lsp_capabilities(), {
-    fileOperations = {
-      didRename = true,
-      willRename = true,
-    },
-  }),
+  ---@type lsp.ClientCapabilities
+  capabilities = utils.create_lsp_capabilities(),
 }

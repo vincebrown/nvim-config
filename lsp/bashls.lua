@@ -1,7 +1,9 @@
-local blink = require 'blink.cmp'
+local utils = require 'core.utils'
 
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'bash-language-server', 'start' },
+  ---@type lsp.LSPObject
   settings = {
     bashIde = {
       -- Glob pattern for finding and parsing shell script files in the workspace.
@@ -16,5 +18,6 @@ return {
   },
   filetypes = { 'bash', 'sh' },
   root_markers = { '.git' },
-  capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), blink.get_lsp_capabilities(), {}),
+  ---@type lsp.ClientCapabilities
+  capabilities = utils.create_lsp_capabilities(),
 }

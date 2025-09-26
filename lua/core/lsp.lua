@@ -1,16 +1,12 @@
+local utils = require 'core.utils'
+
 -- Configure global capabilities for all LSP servers
+---@type lsp.ClientCapabilities
+local global_capabilities = utils.create_lsp_capabilities()
+
 vim.lsp.config('*', {
-  capabilities = {
-    textDocument = {
-      semanticTokens = {
-        multilineTokenSupport = true,
-      },
-      foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      },
-    },
-  },
+  ---@type lsp.ClientCapabilities
+  capabilities = global_capabilities,
   root_markers = { '.git' },
 })
 

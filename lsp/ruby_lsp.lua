@@ -1,9 +1,11 @@
-local blink = require 'blink.cmp'
+local utils = require 'core.utils'
 
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'ruby-lsp' },
   filetypes = { 'ruby', 'eruby' },
-  root_marker = { '.git', 'Gemfile' },
+  root_markers = { '.git', 'Gemfile' },
   single_file_support = true,
-  capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), blink.get_lsp_capabilities()),
+  ---@type lsp.ClientCapabilities
+  capabilities = utils.create_lsp_capabilities(),
 }

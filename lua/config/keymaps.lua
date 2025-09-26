@@ -22,19 +22,23 @@ set('n', '<C-w><C-d>', function()
   vim.diagnostic.open_float { max_width = 70 }
 end, { desc = 'Open diagnostic float' })
 
+set('n', ']d', function()
+  vim.diagnostic.jump { count = 1, float = true }
+end, { desc = 'Next Diagnostic' })
+
+set('n', '[d', function()
+  vim.diagnostic.jump { count = -1, float = true }
+end, { desc = 'Previous Diagnostic' })
+
+set('n', ']e', function()
+  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR }
+end, { desc = 'Next Error' })
+
+set('n', '[e', function()
+  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR }
+end, { desc = 'Previous Error' })
+
 -- Configuration reload
-set('n', '<leader>rr', function()
-  -- Clear Lua package cache
-  for name, _ in pairs(package.loaded) do
-    if name:match '^config' or name:match '^plugins' then
-      package.loaded[name] = nil
-    end
-  end
-
-  -- Reload init.lua
-  dofile(vim.env.MYVIMRC or (vim.fn.stdpath 'config' .. '/init.lua'))
-
-  Snacks.notify.info('Neovim configuration', { title = 'Reloaded' })
-end, { desc = 'Reload Neovim configuration' })
+set('n', '<leader>rr', '<cmd>ReloadNvimConfig<cr>', { desc = 'Reload Neovim configuration' })
 
 set('n', 'yp', '<cmd>YankPath<cr>', { desc = 'Yank Path' })
