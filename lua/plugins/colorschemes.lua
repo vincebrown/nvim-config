@@ -406,61 +406,122 @@ return {
     end,
   },
   {
+    'mcauley-penney/techbase.nvim',
+    opts = {
+      italic_comments = false,
+
+      -- set to true to make the background, floating windows, statusline,
+      -- signcolumn, foldcolumn, and tabline transparent
+      transparent = true,
+
+      -- Here, you can disable plugins. All plugins that techbase supports
+      -- are enabled by default. You do not need to specify the ones you
+      -- want to enable, only those you wish to disable. This table
+      -- accepts key-pair values.
+      plugin_support = {
+        visual_whitespace = false,
+      },
+
+      -- You can enable *only* some plugins by using the "only" table
+      -- inside of the "plugin_support" table. This table accepts strings.
+      -- plugin_support = {
+      --   only = { "visual_whitespace" }
+      -- },
+
+      -- allows you to override any highlight group for finer-grained control
+      hl_overrides = {},
+    },
+    priority = 1000,
+  },
+  {
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       vim.cmd.hi 'Comment gui=none'
     end,
   },
-  { 'rose-pine/neovim', name = 'rose-pine' },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    config = function()
+      require('rose-pine').setup {
+        styles = {
+          transparency = true,
+        },
+      }
+    end,
+  },
   { 'savq/melange-nvim' },
   { 'AhmedAbdulrahman/aylin.vim' },
-  { 'rebelot/kanagawa.nvim' },
+  {
+    'rebelot/kanagawa.nvim',
+    config = function()
+      require('kanagawa').setup {
+        transparent = true,
+      }
+    end,
+  },
   {
     'thesimonho/kanagawa-paper.nvim',
     lazy = false,
     priority = 1000,
-    opts = {},
+    opts = {
+      transparent = true,
+    },
   },
-  { 'sainnhe/gruvbox-material' },
-  { 'sainnhe/everforest', opts = {
-    transparent_background = 2,
-  } },
+  {
+    'sainnhe/gruvbox-material',
+    config = function()
+      vim.g.gruvbox_material_transparent_background = 1
+    end,
+  },
+  {
+    'sainnhe/everforest',
+    config = function()
+      vim.g.everforest_transparent_background = 1
+    end,
+  },
   {
     '2nthony/vitesse.nvim',
     dependencies = {
       'tjdevries/colorbuddy.nvim',
+    },
+    opts = {
+      transparent_background = true,
+      transparent_float_background = false,
     },
   },
   {
     'vague2k/vague.nvim',
     config = function()
       require('vague').setup {
-        -- "none" is the same thing as default. But "italic" and "bold" are also valid options
-        boolean = 'bold',
-        number = 'none',
-        float = 'none',
-        error = 'bold',
-        comments = 'italic',
-        conditionals = 'none',
-        functions = 'none',
-        headings = 'bold',
-        operators = 'none',
-        strings = 'italic',
-        variables = 'none',
+        transparent = true,
+        style = {
+          boolean = 'bold',
+          number = 'none',
+          float = 'none',
+          error = 'bold',
+          comments = 'italic',
+          conditionals = 'none',
+          functions = 'none',
+          headings = 'bold',
+          operators = 'none',
+          strings = 'italic',
+          variables = 'none',
 
-        -- keywords
-        keywords = 'none',
-        keyword_return = 'italic',
-        keywords_loop = 'none',
-        keywords_label = 'none',
-        keywords_exception = 'none',
+          -- keywords
+          keywords = 'none',
+          keyword_return = 'italic',
+          keywords_loop = 'none',
+          keywords_label = 'none',
+          keywords_exception = 'none',
 
-        -- builtin
-        builtin_constants = 'bold',
-        builtin_functions = 'none',
-        builtin_types = 'bold',
-        builtin_variables = 'none',
+          -- builtin
+          builtin_constants = 'bold',
+          builtin_functions = 'none',
+          builtin_types = 'bold',
+          builtin_variables = 'none',
+        },
       }
     end,
   },

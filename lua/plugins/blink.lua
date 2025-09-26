@@ -6,7 +6,7 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    keymap = { preset = 'default' },
+    keymap = { preset = 'super-tab' },
     signature = { enabled = false, window = { border = 'padded' } },
     cmdline = { enabled = true },
     appearance = {
