@@ -65,7 +65,7 @@ vim.api.nvim_create_user_command('YankPath', yank_path, { desc = 'Copy file path
 --- @param bufnr? number Buffer number (defaults to current buffer)
 local function restart_lsp(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients { bufnr = bufnr }
+  local clients = vim.lsp.get_clients { buffer = bufnr }
 
   for _, client in ipairs(clients) do
     vim.lsp.stop_client(client.id)
@@ -84,7 +84,7 @@ vim.api.nvim_create_user_command('LspRestart', restart_lsp, { desc = 'Restart al
 --- Displays information via Snacks notification with extended timeout
 local function lsp_status()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients { bufnr = bufnr }
+  local clients = vim.lsp.get_clients { buffer = bufnr }
 
   if #clients == 0 then
     Snacks.notify.info('󰅚 No LSP clients attached', {
