@@ -435,10 +435,15 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      vim.cmd.hi 'Comment gui=none'
-    end,
+    priority = 1000,
+    opts = {
+      transparent = true,
+      styles = {
+        keywords = {
+          italic = false,
+        },
+      },
+    },
   },
   {
     'rose-pine/neovim',
@@ -476,9 +481,68 @@ return {
     end,
   },
   {
-    'sainnhe/everforest',
+    'neanias/everforest-nvim',
+    priority = 1000,
+    lazy = false,
     config = function()
-      vim.g.everforest_transparent_background = 1
+      require('everforest').setup {
+        background = 'hard',
+        transparent_background_level = 2,
+        disable_italic_comments = true,
+        on_highlights = function(hl, palette)
+          -- Completion menu styling
+          hl.Pmenu = { bg = palette.none, fg = palette.statusline1 }
+          hl.PmenuSel = { bg = palette.bg0, fg = palette.statusline1 }
+          hl.PmenuSbar = { bg = palette.bg0 }
+          hl.PmenuThumb = { bg = palette.bg0 }
+          hl.PmenuExtra = { bg = palette.none, fg = palette.statusline1 }
+
+          hl.YankyYanked = { bg = palette.bg_blue }
+          hl.YankyPut = { bg = palette.bg_blue }
+          hl.Visual = { bg = palette.bg1 }
+
+          -- Blink CMP
+          hl.BlinkCmpMenu = { bg = palette.none, fg = palette.fg }
+          hl.BlinkCmpMenuBorder = { bg = palette.none, fg = palette.grey1 }
+          hl.BlinkCmpMenuSelection = { bg = palette.bg0, fg = palette.fg }
+          hl.BlinkCmpScrollBarThumb = { bg = palette.bg1 }
+          hl.BlinkCmpScrollBarGutter = { bg = palette.bg2 }
+          hl.BlinkCmpLabel = { bg = palette.none, fg = palette.none }
+          hl.BlinkCmpLabelDeprecated = { bg = palette.none, fg = palette.none, strikethrough = true }
+          hl.BlinkCmpLabelDetail = { bg = palette.none, fg = palette.none }
+          hl.BlinkCmpLabelDescription = { bg = palette.none, fg = palette.none }
+          hl.BlinkCmpKind = { bg = palette.none, fg = palette.orange }
+          hl.BlinkCmpSource = { bg = palette.none, fg = palette.grey1 }
+          hl.BlinkCmpGhostText = { fg = palette.grey1, italic = true }
+          hl.BlinkCmpDoc = { bg = palette.none, fg = palette.none }
+          hl.BlinkCmpDocBorder = { bg = palette.none, fg = palette.none }
+          hl.BlinkCmpDocSeparator = { bg = palette.none, fg = palette.none }
+          hl.BlinkCmpDocCursorLine = { bg = palette.none }
+          hl.BlinkCmpSignatureHelp = { bg = palette.none, fg = palette.none }
+          hl.BlinkCmpSignatureHelpBorder = { bg = palette.none, fg = palette.none }
+          hl.BlinkCmpSignatureHelpActiveParameter = { bg = palette.none, fg = palette.orange, bold = true }
+
+          -- Tiny Inline Diagnostics
+          hl.TinyInlineDiagnosticVirtualTextError = { fg = palette.red }
+          hl.TinyInlineDiagnosticVirtualTextWarn = { fg = palette.yellow }
+          hl.TinyInlineDiagnosticVirtualTextInfo = { fg = palette.purple }
+          hl.TinyInlineDiagnosticVirtualTextHint = { fg = palette.green }
+
+          -- WhichKey
+          hl.WhichKeyFloat = { bg = palette.none }
+          hl.WhichKeyBorder = { bg = palette.none, fg = palette.grey1 }
+          hl.WhichKey = { bg = palette.none, fg = palette.statusline2 }
+          hl.WhichKeyGroup = { bg = palette.none, fg = palette.blue }
+          hl.WhichKeyDesc = { bg = palette.none, fg = palette.statusline2 }
+          hl.WhichKeySeparator = { bg = palette.none, fg = palette.statusline1 }
+          hl.WhichKeyValue = { bg = palette.none, fg = palette.fg }
+
+          -- Floating windows
+          hl.NormalFloat = { bg = palette.none, fg = palette.fg }
+          hl.FloatBorder = { bg = palette.none, fg = palette.grey1 }
+          hl.FloatTitle = { bg = palette.none, fg = palette.fg }
+        end,
+      }
     end,
   },
   {

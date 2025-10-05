@@ -8,4 +8,4 @@ require 'config.user-commands'
 
 require 'core.lazy'
 
-vim.cmd.colorscheme 'catppuccin-mocha'
+vim.cmd.colorscheme 'everforest'
