@@ -1,5 +1,141 @@
 return {
   {
+    'neanias/everforest-nvim',
+    priority = 1000,
+    lazy = false,
+    config = function()
+      require('everforest').setup {
+        background = 'hard',
+        transparent_background_level = 2,
+        disable_italic_comments = true,
+        float_style = 'dim',
+        on_highlights = function(hl, palette)
+          hl.YankyYanked = { bg = palette.bg_blue }
+          hl.YankyPut = { bg = palette.bg_blue }
+          hl.Visual = { bg = palette.bg1 }
+
+          -- Tiny Inline Diagnostics
+          hl.TinyInlineDiagnosticVirtualTextError = { fg = palette.red }
+          hl.TinyInlineDiagnosticVirtualTextWarn = { fg = palette.yellow }
+          hl.TinyInlineDiagnosticVirtualTextInfo = { fg = palette.purple }
+          hl.TinyInlineDiagnosticVirtualTextHint = { fg = palette.green }
+
+          -- Treesitter
+
+          -- hl['@type.builtin'] = { fg = palette.aqua }
+          -- hl['@type.definition'] = { fg = palette.aqua }
+          -- hl['@type.qualifier'] = { fg = palette.aqua }
+
+          -- hl['@function'] = { fg = palette.green }
+          -- hl['@function.builtin'] = { fg = palette.blue }
+          -- hl['@keyword.function.typescript'] = { fg = palette.blue }
+          -- ['@function.call'] = { link = 'TSFunctionCall' },
+          -- ['@function.macro'] = { link = 'TSFuncMacro' },
+
+          -- hl['@keyword.conditional'] = { fg = palette.purple }
+          hl['@lsp.type.keyword.go'] = { fg = palette.blue }
+          -- hl['@keyword.typescript'] = { fg = palette.orange }
+          --
+          -- hl['@character'] = { link = 'TSCharacter' }
+          -- hl['@character.special'] = { link = 'TSCharacterSpecial' }
+          -- hl['@comment'] = { link = 'TSComment' }
+          -- hl['@conceal'] = { link = 'Grey' }
+          -- hl['@constant'] = { link = 'TSConstant' }
+          -- hl['@constant.builtin'] = { link = 'TSConstBuiltin' }
+          -- ['@constant.macro'] = { link = 'TSConstMacro' },
+          -- ['@constructor'] = { link = 'TSConstructor' },
+          -- ['@debug'] = { link = 'TSDebug' },
+          -- ['@define'] = { link = 'TSDefine' },
+          -- ['@error'] = { link = 'TSError' },
+          -- ['@exception'] = { link = 'TSException' },
+          -- ['@field'] = { link = 'TSField' },
+          -- ['@float'] = { link = 'TSFloat' },
+          -- ['@include'] = { link = 'TSInclude' },
+          -- ['@keyword'] = { link = 'TSKeyword' },
+          -- ['@keyword.function'] = { link = 'TSKeywordFunction' },
+          -- ['@keyword.operator'] = { link = 'TSKeywordOperator' },
+          -- ['@keyword.return'] = { link = 'TSKeywordReturn' },
+          -- ['@label'] = { link = 'TSLabel' },
+          -- ['@math'] = { link = 'TSMath' },
+          -- ['@method'] = { link = 'TSMethod' },
+          -- ['@method.call'] = { link = 'TSMethodCall' },
+          -- ['@namespace'] = { link = 'TSNamespace' },
+          -- ['@none'] = { link = 'TSNone' },
+          -- ['@number'] = { link = 'TSNumber' },
+          -- ['@operator'] = { link = 'TSOperator' },
+          -- ['@parameter'] = { link = 'TSParameter' },
+          -- ['@parameter.reference'] = { link = 'TSParameterReference' },
+          -- ['@preproc'] = { link = 'TSPreProc' },
+          -- ['@property'] = { link = 'TSProperty' },
+          -- ['@punctuation.bracket'] = { link = 'TSPunctBracket' },
+          -- ['@punctuation.delimiter'] = { link = 'TSPunctDelimiter' },
+          -- ['@punctuation.special'] = { link = 'TSPunctSpecial' },
+          -- ['@repeat'] = { link = 'TSRepeat' },
+          -- ['@storageclass'] = { link = 'TSStorageClass' },
+          -- ['@storageclass.lifetime'] = { link = 'TSStorageClassLifetime' },
+          -- ['@strike'] = { link = 'TSStrike' },
+          -- ['@string'] = { link = 'TSString' },
+          -- ['@string.escape'] = { link = 'TSStringEscape' },
+          -- ['@string.regex'] = { link = 'TSStringRegex' },
+          -- ['@string.special'] = { link = 'TSStringSpecial' },
+          -- ['@symbol'] = { link = 'TSSymbol' },
+          -- ['@tag'] = { link = 'TSTag' },
+          -- ['@tag.attribute'] = { link = 'TSTagAttribute' },
+          -- ['@tag.delimiter'] = { link = 'TSTagDelimiter' },
+          -- ['@text'] = { link = 'TSText' },
+          -- ['@text.danger'] = { link = 'TSDanger' },
+          -- ['@text.diff.add'] = { link = 'diffAdded' },
+          -- ['@text.diff.delete'] = { link = 'diffRemoved' },
+          -- ['@text.emphasis'] = { link = 'TSEmphasis' },
+          -- ['@text.environment'] = { link = 'TSEnvironment' },
+          -- ['@text.environment.name'] = { link = 'TSEnvironmentName' },
+          -- ['@text.literal'] = { link = 'TSLiteral' },
+          -- ['@text.math'] = { link = 'TSMath' },
+          -- ['@text.note'] = { link = 'TSNote' },
+          -- ['@text.reference'] = { link = 'TSTextReference' },
+          -- ['@text.strike'] = { link = 'TSStrike' },
+          -- ['@text.strong'] = { link = 'TSStrong' },
+          -- ['@text.title'] = { link = 'TSTitle' },
+          -- ['@text.todo'] = { link = 'TSTodo' },
+          -- ['@text.todo.checked'] = { link = 'Green' },
+          -- ['@text.todo.unchecked'] = { link = 'Ignore' },
+          -- ['@text.underline'] = { link = 'TSUnderline' },
+          -- ['@text.uri'] = { link = 'TSURI' },
+          -- ['@text.warning'] = { link = 'TSWarning' },
+          -- ['@todo'] = { link = 'TSTodo' },
+          -- ['@type'] = { link = 'TSType' },
+          -- ['@uri'] = { link = 'TSURI' },
+          -- ['@variable'] = { link = 'TSVariable' },
+          -- ['@variable.builtin'] = { link = 'TSVariableBuiltin' },
+          --
+          -- ['@lsp.type.class'] = { link = 'TSType' },
+          -- ['@lsp.type.comment'] = { link = 'TSComment' },
+          -- ['@lsp.type.decorator'] = { link = 'TSFunction' },
+          -- ['@lsp.type.enum'] = { link = 'TSType' },
+          -- ['@lsp.type.enumMember'] = { link = 'TSProperty' },
+          -- ['@lsp.type.events'] = { link = 'TSLabel' },
+          -- ['@lsp.type.function'] = { link = 'TSFunction' },
+          -- ['@lsp.type.interface'] = { link = 'TSType' },
+          -- ['@lsp.type.keyword'] = { link = 'TSKeyword' },
+          -- ['@lsp.type.macro'] = { link = 'TSConstMacro' },
+          -- ['@lsp.type.method'] = { link = 'TSMethod' },
+          -- ['@lsp.type.modifier'] = { link = 'TSTypeQualifier' },
+          -- ['@lsp.type.namespace'] = { link = 'TSNamespace' },
+          -- ['@lsp.type.number'] = { link = 'TSNumber' },
+          -- ['@lsp.type.operator'] = { link = 'TSOperator' },
+          -- ['@lsp.type.parameter'] = { link = 'TSParameter' },
+          -- ['@lsp.type.property'] = { link = 'TSProperty' },
+          -- ['@lsp.type.regexp'] = { link = 'TSStringRegex' },
+          -- ['@lsp.type.string'] = { link = 'TSString' },
+          -- ['@lsp.type.struct'] = { link = 'TSType' },
+          -- ['@lsp.type.type'] = { link = 'TSType' },
+          -- ['@lsp.type.typeParameter'] = { link = 'TSTypeDefinition' },
+          -- ['@lsp.type.variable'] = { link = 'TSVariable' },
+        end,
+      }
+    end,
+  },
+  {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
@@ -478,71 +614,6 @@ return {
     'sainnhe/gruvbox-material',
     config = function()
       vim.g.gruvbox_material_transparent_background = 1
-    end,
-  },
-  {
-    'neanias/everforest-nvim',
-    priority = 1000,
-    lazy = false,
-    config = function()
-      require('everforest').setup {
-        background = 'hard',
-        transparent_background_level = 2,
-        disable_italic_comments = true,
-        on_highlights = function(hl, palette)
-          -- Completion menu styling
-          hl.Pmenu = { bg = palette.none, fg = palette.statusline1 }
-          hl.PmenuSel = { bg = palette.bg0, fg = palette.statusline1 }
-          hl.PmenuSbar = { bg = palette.bg0 }
-          hl.PmenuThumb = { bg = palette.bg0 }
-          hl.PmenuExtra = { bg = palette.none, fg = palette.statusline1 }
-
-          hl.YankyYanked = { bg = palette.bg_blue }
-          hl.YankyPut = { bg = palette.bg_blue }
-          hl.Visual = { bg = palette.bg1 }
-
-          -- Blink CMP
-          hl.BlinkCmpMenu = { bg = palette.none, fg = palette.fg }
-          hl.BlinkCmpMenuBorder = { bg = palette.none, fg = palette.grey1 }
-          hl.BlinkCmpMenuSelection = { bg = palette.bg0, fg = palette.fg }
-          hl.BlinkCmpScrollBarThumb = { bg = palette.bg1 }
-          hl.BlinkCmpScrollBarGutter = { bg = palette.bg2 }
-          hl.BlinkCmpLabel = { bg = palette.none, fg = palette.none }
-          hl.BlinkCmpLabelDeprecated = { bg = palette.none, fg = palette.none, strikethrough = true }
-          hl.BlinkCmpLabelDetail = { bg = palette.none, fg = palette.none }
-          hl.BlinkCmpLabelDescription = { bg = palette.none, fg = palette.none }
-          hl.BlinkCmpKind = { bg = palette.none, fg = palette.orange }
-          hl.BlinkCmpSource = { bg = palette.none, fg = palette.grey1 }
-          hl.BlinkCmpGhostText = { fg = palette.grey1, italic = true }
-          hl.BlinkCmpDoc = { bg = palette.none, fg = palette.none }
-          hl.BlinkCmpDocBorder = { bg = palette.none, fg = palette.none }
-          hl.BlinkCmpDocSeparator = { bg = palette.none, fg = palette.none }
-          hl.BlinkCmpDocCursorLine = { bg = palette.none }
-          hl.BlinkCmpSignatureHelp = { bg = palette.none, fg = palette.none }
-          hl.BlinkCmpSignatureHelpBorder = { bg = palette.none, fg = palette.none }
-          hl.BlinkCmpSignatureHelpActiveParameter = { bg = palette.none, fg = palette.orange, bold = true }
-
-          -- Tiny Inline Diagnostics
-          hl.TinyInlineDiagnosticVirtualTextError = { fg = palette.red }
-          hl.TinyInlineDiagnosticVirtualTextWarn = { fg = palette.yellow }
-          hl.TinyInlineDiagnosticVirtualTextInfo = { fg = palette.purple }
-          hl.TinyInlineDiagnosticVirtualTextHint = { fg = palette.green }
-
-          -- WhichKey
-          hl.WhichKeyFloat = { bg = palette.none }
-          hl.WhichKeyBorder = { bg = palette.none, fg = palette.grey1 }
-          hl.WhichKey = { bg = palette.none, fg = palette.statusline2 }
-          hl.WhichKeyGroup = { bg = palette.none, fg = palette.blue }
-          hl.WhichKeyDesc = { bg = palette.none, fg = palette.statusline2 }
-          hl.WhichKeySeparator = { bg = palette.none, fg = palette.statusline1 }
-          hl.WhichKeyValue = { bg = palette.none, fg = palette.fg }
-
-          -- Floating windows
-          hl.NormalFloat = { bg = palette.none, fg = palette.fg }
-          hl.FloatBorder = { bg = palette.none, fg = palette.grey1 }
-          hl.FloatTitle = { bg = palette.none, fg = palette.fg }
-        end,
-      }
     end,
   },
   {

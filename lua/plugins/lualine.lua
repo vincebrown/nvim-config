@@ -1,6 +1,9 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
+    dependencies = {
+      { 'yavorski/lualine-macro-recording.nvim' },
+    },
     config = function()
       require('lualine').setup {
         options = {
@@ -24,7 +27,7 @@ return {
         sections = {
           lualine_a = {},
           lualine_b = { 'branch', 'diff', 'diagnostics' },
-          lualine_c = { 'filename' },
+          lualine_c = { 'filename', 'macro_recording', '%S' },
           lualine_x = { 'filetype' },
           lualine_y = {},
           lualine_z = {},
