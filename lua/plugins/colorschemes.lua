@@ -14,6 +14,8 @@ return {
           hl.YankyPut = { bg = palette.bg_blue }
           hl.Visual = { bg = palette.bg1 }
 
+          hl.NormalFloat = { bg = palette.none }
+
           -- Tiny Inline Diagnostics
           hl.TinyInlineDiagnosticVirtualTextError = { fg = palette.red }
           hl.TinyInlineDiagnosticVirtualTextWarn = { fg = palette.yellow }
@@ -540,6 +542,33 @@ return {
         },
       }
     end,
+  },
+  {
+    'metalelf0/black-metal-theme-neovim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('black-metal').setup {
+        theme = 'gorgoroth',
+        transparent = true,
+        plain_float = true,
+        colors = {
+          bg = '#0a0a0a',
+          line = '#0a0a0a',
+        },
+      }
+      require('black-metal').load()
+    end,
+  },
+  {
+    'dgox16/oldworld.nvim',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'mellow-theme/mellow.nvim',
+    lazy = false,
+    priority = 1000,
   },
   {
     'mcauley-penney/techbase.nvim',

@@ -10,6 +10,7 @@ vim.lsp.config('*', {
   root_markers = { '.git' },
 })
 
+-- Add tsgo once stable
 vim.lsp.enable { 'vtsls', 'gopls', 'lua_ls', 'ruby_lsp', 'jsonls', 'bashls' }
 
 vim.diagnostic.config {
