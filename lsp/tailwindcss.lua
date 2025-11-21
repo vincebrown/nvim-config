@@ -43,6 +43,7 @@ return {
         invalidConfigPath = 'error',
         invalidTailwindDirective = 'error',
         recommendedVariantOrder = 'warning',
+        suggestCanonicalClasses = 'ignore',
       },
       classAttributes = {
         'class',

@@ -9,6 +9,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Oil rename file LSP integrated
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'OilActionsPost',
+  callback = function(event)
+    if event.data.actions[1].type == 'move' then
+      Snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
+    end
+  end,
+})
+
 -- Run this anytime a LSP attaches
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -28,62 +38,69 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     map('gt', Snacks.picker.lsp_type_definitions, 'Go to type definitions')
 
-    local function client_supports_method(client, method, bufnr)
-      return client:supports_method(method, bufnr)
-    end
+    -- TypeScript-specific keymaps using Snacks.keymap (vtsls only)
+    Snacks.keymap.set('n', '<leader>co', function()
+      vim.lsp.buf.code_action {
+        apply = true,
+        context = {
+          only = { 'source.organizeImports' },
+          diagnostics = {},
+        },
+      }
+    end, {
+      lsp = { name = 'vtsls' },
+      desc = 'LSP: Typescript organize imports',
+    })
 
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    Snacks.keymap.set('n', '<leader>cm', function()
+      vim.lsp.buf.code_action {
+        apply = true,
+        context = {
+          ---@diagnostic disable-next-line: assign-type-mismatch
+          only = { 'source.addMissingImports.ts' },
+          diagnostics = {},
+        },
+      }
+    end, {
+      lsp = { name = 'vtsls' },
+      desc = 'LSP: Typescript add missing imports',
+    })
 
-    if client and client.name == 'vtsls' then
-      map('<leader>co', function()
-        vim.lsp.buf.code_action {
-          apply = true,
-          context = {
-            only = { 'source.organizeImports' },
-            diagnostics = {},
-          },
-        }
-      end, 'Typescript organize imports')
+    Snacks.keymap.set('n', '<leader>cu', function()
+      vim.lsp.buf.code_action {
+        apply = true,
+        context = {
+          ---@diagnostic disable-next-line: assign-type-mismatch
+          only = { 'source.removeUnused.ts' },
+          diagnostics = {},
+        },
+      }
+    end, {
+      lsp = { name = 'vtsls' },
+      desc = 'LSP: Typescript remove unused imports',
+    })
 
-      map('<leader>cm', function()
-        vim.lsp.buf.code_action {
-          apply = true,
-          context = {
-            ---@diagnostic disable-next-line: assign-type-mismatch
-            only = { 'source.addMissingImports.ts' },
-            diagnostics = {},
-          },
-        }
-      end, 'Typescript add missing imports')
+    Snacks.keymap.set('n', '<leader>cD', function()
+      vim.lsp.buf.code_action {
+        apply = true,
+        context = {
+          ---@diagnostic disable-next-line: assign-type-mismatch
+          only = { 'source.fixAll.ts' },
+          diagnostics = {},
+        },
+      }
+    end, {
+      lsp = { name = 'vtsls' },
+      desc = 'LSP: Typescript fix all',
+    })
 
-      map('<leader>cu', function()
-        vim.lsp.buf.code_action {
-          apply = true,
-          context = {
-            ---@diagnostic disable-next-line: assign-type-mismatch
-            only = { 'source.removeUnused.ts' },
-            diagnostics = {},
-          },
-        }
-      end, 'Typescript remove unused imports')
-
-      map('<leader>cD', function()
-        vim.lsp.buf.code_action {
-          apply = true,
-          context = {
-            ---@diagnostic disable-next-line: assign-type-mismatch
-            only = { 'source.fixAll.ts' },
-            diagnostics = {},
-          },
-        }
-      end, 'Typescript remove unused imports')
-    end
-
-    if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-      map('<leader>th', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-      end, 'Toggle Inlay Hints')
-    end
+    -- Inlay hints toggle using Snacks.keymap (only for clients that support the method)
+    Snacks.keymap.set('n', '<leader>th', function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = vim.api.nvim_get_current_buf() })
+    end, {
+      lsp = { method = vim.lsp.protocol.Methods.textDocument_inlayHint },
+      desc = 'LSP: Toggle Inlay Hints',
+    })
   end,
 })
 

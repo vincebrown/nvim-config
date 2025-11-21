@@ -19,9 +19,9 @@ return {
           enable = true,
           disable = { 'ruby' },
         },
-        autotag = {
-          enable = true,
-        },
+        -- autotag = {
+        --   enable = true,
+        -- },
         ensure_installed = {
           'astro',
           'bash',

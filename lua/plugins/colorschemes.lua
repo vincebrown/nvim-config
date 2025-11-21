@@ -1,5 +1,15 @@
 return {
   {
+    'webhooked/kanso.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('kanso').setup {
+        transparent = true,
+      }
+    end,
+  },
+  {
     'neanias/everforest-nvim',
     priority = 1000,
     lazy = false,
@@ -569,6 +579,10 @@ return {
     'mellow-theme/mellow.nvim',
     lazy = false,
     priority = 1000,
+    config = function()
+      vim.g.mellow_transparent = true
+      -- vim.cmd([[colorscheme mellow]])
+    end,
   },
   {
     'mcauley-penney/techbase.nvim',
