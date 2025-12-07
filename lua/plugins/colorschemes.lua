@@ -10,6 +10,28 @@ return {
     end,
   },
   {
+    'embark-theme/vim',
+    lazy = false,
+    priority = 1000,
+    name = 'embark',
+  },
+  { 'datsfilipe/vesper.nvim' },
+  {
+    'xero/miasma.nvim',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'ramojus/mellifluous.nvim',
+    lazy = false,
+    priority = 1000,
+  },
+  {
     'neanias/everforest-nvim',
     priority = 1000,
     lazy = false,
