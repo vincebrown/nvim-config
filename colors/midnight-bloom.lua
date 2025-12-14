@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-global
--- Forest Canopy
--- A serene, natural theme inspired by filtered light through trees.
--- Combines deep forest greens with warm earth tones and soft contrast.
+-- Midnight Bloom - "Moonlit Garden" Edition
+-- Deep indigo base with soft botanical accents
+-- Designed for focus, comfort, and elegance on transparent backgrounds.
 -- Author: Vince Brown
 -- License: MIT
 
@@ -10,46 +10,43 @@
 --------------------------------------------------------------------------------
 
 local config = {
-  transparent = vim.g.forest_canopy_transparent or false,
+  transparent = vim.g.midnight_bloom_transparent or false,
 }
 
 --------------------------------------------------------------------------------
 -- COLOR PALETTE
--- "Forest Canopy" - Deep greens, warm earth, and filtered light.
+-- "Moonlit Garden" Palette: Deep indigo with botanical pastels
 --------------------------------------------------------------------------------
 
 local colors = {
-  -- The Forest Floor (Dark, Rich Backgrounds)
-  black = '#1a1d1f',        -- Deep forest floor
-  bg_dark = '#2f3e46',      -- Dark slate (from your palette)
-  bg_mid = '#354f52',       -- Mid forest green (from your palette)
-  bg_light = '#476169',     -- Lighter slate
-  bg_highlight = '#415a5f', -- Muted highlight
-  bg_accent = '#52796f',    -- Forest green accent (from your palette)
+  -- The Foundation (Deep Indigo Backgrounds)
+  black = '#1a1b26',
+  bg_dark = '#16161e',
+  bg_mid = '#1f2028',
+  bg_light = '#24252e',
+  bg_highlight = '#292a36',
+  bg_accent = '#343545',
 
-  -- The Canopy (Natural, Warm Foregrounds)
-  fg_bright = '#eae0d5',    -- Soft cream/ivory (from your palette) - Keywords
-  fg_normal = '#cad2c5',    -- Sage grey (from your palette) - Base text
-  fg_muted = '#a5a58d',     -- Olive grey (from your palette) - Secondary
-  
-  -- The Life (Green Accents - The Forest's Heart)
-  moss = '#84a98c',         -- Vibrant moss green (from your palette) - Primary accent
-  sage = '#b0c4b1',         -- Soft sage - strings, data
-  forest = '#52796f',       -- Deep forest (from your palette) - secondary
-  
-  -- Natural Elements
-  stone = '#6b7972',        -- Stone grey for comments
-  bark = '#5a6660',         -- Dark bark for punctuation
-  
-  -- Warm Accents (Earth & Clay)
-  clay = '#e07a5f',         -- Terracotta (from your palette) - errors/warnings
-  sand = '#c6ac8f',         -- Warm sand (from your palette) - warnings
-  seafoam = '#83c5be',      -- Seafoam blue (from your palette) - info/links
-  
+  -- The Foregrounds (Cool Silver Tones)
+  fg_bright = '#d5d6e0',
+  fg_normal = '#c8c8d3',
+  fg_muted = '#9699a8',
+
+  -- The Accents (Botanical Pastels)
+  rose = '#e0a3c2',
+  lime = '#9ece6a',
+  ice = '#7dcfff',
+  lavender = '#bb9af7',
+  peach = '#ffc987',
+
+  -- Punctuation & Structure
+  slate = '#565f89',
+  graphite = '#414868',
+
   -- Functional Colors
-  error_soft = '#e07a5f',   -- Clay/terracotta
-  warn_soft = '#c6ac8f',    -- Warm sand
-  success_soft = '#84a98c', -- Moss green
+  error_soft = '#f7768e',
+  warn_soft = '#e0af68',
+  success_soft = '#9ece6a',
 }
 
 --------------------------------------------------------------------------------
@@ -61,67 +58,51 @@ local function get_palette()
   local none = 'NONE'
 
   return {
-    -- UI backgrounds (respect transparency setting)
     bg = transparent and none or colors.black,
     bg_float = transparent and none or colors.bg_dark,
     bg_cursor = transparent and colors.bg_mid or colors.bg_mid,
     bg_statusline = transparent and colors.bg_light or colors.bg_light,
     bg_visual = colors.bg_highlight,
     bg_search = colors.bg_accent,
-
-    -- For elements that need solid bg even in transparent mode
     bg_solid = colors.black,
     bg_float_solid = colors.bg_dark,
 
-    -- UI foregrounds
-    fg = colors.fg_normal,       -- Base text is sage grey
-    fg_dim = colors.stone,       -- Dim text is stone grey
-    fg_inactive = colors.bark,   -- Inactive is dark bark
+    fg = colors.fg_normal,
+    fg_dim = colors.slate,
+    fg_inactive = colors.graphite,
 
-    -- Diff backgrounds (Forest tints)
-    bg_diff_add = '#2a3830',
-    bg_diff_change = '#2e3e45',
-    bg_diff_delete = '#3a2e2e',
-    bg_diff_text = '#3d4d52',
+    bg_diff_add = '#1a2a1e',
+    bg_diff_change = '#1a1e2a',
+    bg_diff_delete = '#2a1a1e',
+    bg_diff_text = '#2a2a3a',
 
-    -- Syntax semantics (Forest Light Through Canopy)
-    -- The rule: Keywords cream, Functions moss, Types seafoam, Strings sage
-    
-    keyword = colors.fg_bright,  -- Keywords in soft cream (Bold) - "private", "async"
-    func = colors.moss,          -- Functions in vibrant moss (Bold) - standout
-    
-    string = colors.sage,        -- Strings in soft sage
-    constant = colors.fg_muted,  -- Constants in olive grey
-    
-    type = colors.seafoam,       -- Types in seafoam blue for distinction
-    variable = colors.fg_normal, -- Variables in sage grey
-    property = colors.fg_normal, -- Properties in sage grey
-    
-    operator = colors.bark,      -- Operators recede in dark bark
-    comment = colors.stone,      -- Comments in stone grey
-    punctuation = colors.bark,   -- Punctuation recedes
-    
-    tag = colors.fg_bright,      -- HTML tags in cream
-    attribute = colors.moss,     -- Attributes in moss green
+    keyword = colors.rose,
+    func = colors.lime,
+    string = colors.ice,
+    constant = colors.peach,
+    type = colors.lavender,
+    variable = colors.fg_normal,
+    property = colors.fg_normal,
+    operator = colors.graphite,
+    comment = colors.slate,
+    punctuation = colors.graphite,
+    tag = colors.rose,
+    attribute = colors.peach,
 
-    -- Diagnostic/UI semantics
     error = colors.error_soft,
     warning = colors.warn_soft,
-    info = colors.seafoam,
-    hint = colors.stone,
+    info = colors.ice,
+    hint = colors.slate,
     success = colors.success_soft,
 
-    -- Git semantics
     git_add = colors.success_soft,
-    git_change = colors.seafoam,
+    git_change = colors.ice,
     git_delete = colors.error_soft,
 
-    -- Special
-    match = colors.moss,         -- Search matches in vibrant moss
-    link = colors.seafoam,       -- Links in seafoam
-
-    -- Additional semantic colors for the new palette
-    white = colors.fg_bright,    -- Brightest color for emphasis
+    match = colors.lime,
+    link = colors.ice,
+    white = colors.fg_bright,
+    steel = colors.lavender,
 
     none = none,
   }
@@ -131,16 +112,10 @@ end
 -- HIGHLIGHT HELPER
 --------------------------------------------------------------------------------
 
----@param fg? string
----@param bg? string
----@param opts? table
----@return table
 local function hl(fg, bg, opts)
   local h = { fg = fg, bg = bg }
   if opts then
-    for k, v in pairs(opts) do
-      h[k] = v
-    end
+    for k, v in pairs(opts) do h[k] = v end
   end
   return h
 end
@@ -151,7 +126,6 @@ end
 
 local function generate_highlights(p)
   return {
-    -- Editor UI
     Normal = hl(p.fg, p.bg),
     NormalFloat = hl(p.fg, p.bg_float),
     NormalNC = hl(p.fg, p.bg),
@@ -171,20 +145,17 @@ local function generate_highlights(p)
     Visual = hl(p.none, p.bg_visual),
     VisualNOS = hl(p.none, p.bg_visual),
 
-    -- Popup menu
     Pmenu = hl(p.fg, p.bg_float_solid),
     PmenuSel = hl(p.bg_solid, p.white, { bold = true }),
     PmenuSbar = hl(p.none, p.bg_float_solid),
     PmenuThumb = hl(p.none, p.fg_inactive),
 
-    -- Search & Highlighting
     Search = hl(p.bg_solid, p.match),
     IncSearch = hl(p.bg_solid, p.white),
     CurSearch = hl(p.bg_solid, p.white),
     Substitute = hl(p.bg_solid, p.error),
     MatchParen = hl(p.white, p.bg_search, { bold = true }),
 
-    -- Statusline & Tabline
     StatusLine = hl(p.fg, p.bg_statusline),
     StatusLineNC = hl(p.fg_dim, p.bg_cursor),
     TabLine = hl(p.fg_dim, p.bg_cursor),
@@ -193,7 +164,6 @@ local function generate_highlights(p)
     WinBar = hl(p.fg, p.bg_statusline),
     WinBarNC = hl(p.fg_dim, p.bg_cursor),
 
-    -- Messages
     ModeMsg = hl(p.white, p.none, { bold = true }),
     MoreMsg = hl(p.success, p.none, { bold = true }),
     WarningMsg = hl(p.warning, p.none, { bold = true }),
@@ -201,7 +171,6 @@ local function generate_highlights(p)
     Question = hl(p.warning, p.none),
     Title = hl(p.white, p.none, { bold = true }),
 
-    -- Diff
     DiffAdd = hl(p.none, p.bg_diff_add),
     DiffChange = hl(p.none, p.bg_diff_change),
     DiffDelete = hl(p.none, p.bg_diff_delete),
@@ -210,13 +179,11 @@ local function generate_highlights(p)
     Changed = hl(p.git_change, p.none),
     Removed = hl(p.git_delete, p.none),
 
-    -- Spelling
     SpellBad = hl(p.none, p.none, { undercurl = true, sp = p.error }),
     SpellCap = hl(p.none, p.none, { undercurl = true, sp = p.info }),
     SpellLocal = hl(p.none, p.none, { undercurl = true, sp = p.info }),
     SpellRare = hl(p.none, p.none, { undercurl = true, sp = p.hint }),
 
-    -- Misc
     NonText = hl(p.bg_visual, p.none),
     EndOfBuffer = hl(p.bg, p.none),
     Whitespace = hl(p.bg_visual, p.none),
@@ -224,7 +191,6 @@ local function generate_highlights(p)
     Conceal = hl(p.fg_dim, p.none),
     Directory = hl(p.white, p.none),
 
-    -- Diagnostics
     DiagnosticError = hl(p.error, p.none),
     DiagnosticWarn = hl(p.warning, p.none),
     DiagnosticInfo = hl(p.info, p.none),
@@ -246,9 +212,6 @@ local function generate_highlights(p)
     DiagnosticSignHint = hl(p.hint, p.none),
     DiagnosticSignOk = hl(p.success, p.none),
 
-    --------------------------------------------------------------------------------
-    -- SYNTAX (Traditional Vim)
-    --------------------------------------------------------------------------------
     Comment = hl(p.comment, p.none),
     Constant = hl(p.constant, p.none),
     String = hl(p.string, p.none),
@@ -285,26 +248,16 @@ local function generate_highlights(p)
     Error = hl(p.error, p.none),
     Todo = hl(p.bg_solid, p.warning, { bold = true }),
 
-    --------------------------------------------------------------------------------
-    -- TREESITTER
-    --------------------------------------------------------------------------------
-    -- Identifiers
     ['@variable'] = hl(p.fg, p.none),
     ['@variable.builtin'] = hl(p.white, p.none),
     ['@variable.parameter'] = hl(p.fg, p.none),
     ['@variable.member'] = hl(p.property, p.none),
-
-    -- Constants
     ['@constant'] = hl(p.constant, p.none),
     ['@constant.builtin'] = hl(p.constant, p.none),
     ['@constant.macro'] = hl(p.constant, p.none),
-
-    -- Modules/Namespaces
     ['@module'] = hl(p.white, p.none),
     ['@module.builtin'] = hl(p.white, p.none),
     ['@namespace'] = { link = '@module' },
-
-    -- Strings
     ['@string'] = hl(p.string, p.none),
     ['@string.documentation'] = hl(p.string, p.none),
     ['@string.regex'] = hl(p.string, p.none),
@@ -313,26 +266,18 @@ local function generate_highlights(p)
     ['@string.special'] = hl(p.white, p.none),
     ['@string.special.symbol'] = hl(p.white, p.none),
     ['@string.special.url'] = hl(p.link, p.none, { underline = true }),
-
-    -- Characters & Numbers
     ['@character'] = hl(p.string, p.none),
     ['@character.special'] = hl(p.white, p.none),
     ['@number'] = hl(p.constant, p.none),
     ['@number.float'] = hl(p.constant, p.none),
     ['@boolean'] = hl(p.constant, p.none),
-
-    -- Types
     ['@type'] = hl(p.type, p.none),
     ['@type.builtin'] = hl(p.type, p.none),
     ['@type.definition'] = hl(p.type, p.none),
     ['@type.qualifier'] = hl(p.keyword, p.none),
-
-    -- Attributes
     ['@attribute'] = hl(p.attribute, p.none),
     ['@attribute.builtin'] = hl(p.attribute, p.none),
     ['@property'] = hl(p.property, p.none),
-
-    -- Functions
     ['@function'] = hl(p.func, p.none),
     ['@function.builtin'] = hl(p.func, p.none),
     ['@function.call'] = hl(p.func, p.none),
@@ -341,14 +286,8 @@ local function generate_highlights(p)
     ['@function.method.call'] = hl(p.func, p.none),
     ['@method'] = hl(p.func, p.none),
     ['@method.call'] = hl(p.func, p.none),
-
-    -- Constructors
     ['@constructor'] = hl(p.type, p.none),
-
-    -- Operators
     ['@operator'] = hl(p.operator, p.none),
-
-    -- Keywords
     ['@keyword'] = hl(p.keyword, p.none),
     ['@keyword.conditional'] = hl(p.keyword, p.none),
     ['@keyword.conditional.ternary'] = hl(p.operator, p.none),
@@ -365,21 +304,15 @@ local function generate_highlights(p)
     ['@keyword.return'] = hl(p.keyword, p.none),
     ['@keyword.storage'] = hl(p.keyword, p.none),
     ['@keyword.type'] = hl(p.keyword, p.none),
-
-    -- Punctuation
     ['@punctuation.bracket'] = hl(p.punctuation, p.none),
     ['@punctuation.delimiter'] = hl(p.punctuation, p.none),
     ['@punctuation.special'] = hl(p.white, p.none),
-
-    -- Comments
     ['@comment'] = hl(p.comment, p.none),
     ['@comment.documentation'] = hl(p.comment, p.none),
     ['@comment.error'] = hl(p.bg_solid, p.error, { bold = true }),
     ['@comment.warning'] = hl(p.bg_solid, p.warning, { bold = true }),
     ['@comment.note'] = hl(p.bg_solid, p.info, { bold = true }),
     ['@comment.todo'] = hl(p.bg_solid, p.warning, { bold = true }),
-
-    -- Markup (Markdown, etc.)
     ['@markup.strong'] = hl(p.none, p.none, { bold = true }),
     ['@markup.italic'] = hl(p.none, p.none, { italic = true }),
     ['@markup.strikethrough'] = hl(p.none, p.none, { strikethrough = true }),
@@ -401,19 +334,12 @@ local function generate_highlights(p)
     ['@markup.list'] = hl(p.white, p.none),
     ['@markup.list.checked'] = hl(p.success, p.none),
     ['@markup.list.unchecked'] = hl(p.fg_inactive, p.none),
-
-    -- Tags (HTML/JSX)
     ['@tag'] = hl(p.tag, p.none, { bold = true }),
     ['@tag.attribute'] = hl(p.attribute, p.none),
     ['@tag.builtin'] = hl(p.tag, p.none, { bold = true }),
     ['@tag.delimiter'] = hl(p.punctuation, p.none),
-
-    -- None/Other
     ['@none'] = hl(p.fg, p.none),
 
-    --------------------------------------------------------------------------------
-    -- LSP SEMANTIC TOKENS
-    --------------------------------------------------------------------------------
     ['@lsp.type.boolean'] = { link = '@boolean' },
     ['@lsp.type.builtinType'] = { link = '@type.builtin' },
     ['@lsp.type.class'] = { link = '@type' },
@@ -440,36 +366,19 @@ local function generate_highlights(p)
     ['@lsp.type.typeParameter'] = { link = '@type' },
     ['@lsp.type.variable'] = { link = '@variable' },
 
-    --------------------------------------------------------------------------------
-    -- LANGUAGE SPECIFIC OVERRIDES
-    --------------------------------------------------------------------------------
-    -- Go
     ['@keyword.import.go'] = hl(p.keyword, p.none),
     ['@module.go'] = hl(p.fg, p.none),
     ['@constant.builtin.go'] = hl(p.white, p.none),
-
-    -- JavaScript/TypeScript
     ['@keyword.import.javascript'] = hl(p.keyword, p.none),
     ['@keyword.import.typescript'] = hl(p.keyword, p.none),
     ['@keyword.import.tsx'] = hl(p.keyword, p.none),
     ['@constructor.tsx'] = { link = '@type' },
-
-    -- Lua
     ['@constructor.lua'] = hl(p.punctuation, p.none),
-
-    -- JSON
     ['@label.json'] = hl(p.property, p.none),
     ['@string.json'] = hl(p.string, p.none),
-
-    -- YAML
     ['@variable.member.yaml'] = hl(p.property, p.none),
     ['@string.yaml'] = hl(p.string, p.none),
 
-    --------------------------------------------------------------------------------
-    -- PLUGINS
-    --------------------------------------------------------------------------------
-
-    -- Blink.cmp
     BlinkCmpMenu = hl(p.fg, p.bg_float_solid),
     BlinkCmpMenuBorder = hl(p.fg_inactive, p.bg_float_solid),
     BlinkCmpMenuSelection = hl(p.none, p.bg_visual),
@@ -485,8 +394,6 @@ local function generate_highlights(p)
     BlinkCmpSignatureHelpBorder = hl(p.fg_inactive, p.bg_float_solid),
     BlinkCmpSignatureHelpActiveParameter = hl(p.match, p.none, { bold = true }),
     BlinkCmpGhostText = hl(p.fg_dim, p.none),
-
-    -- Blink.cmp kind icons (LSP completion kinds)
     BlinkCmpKindArray = hl(p.white, p.none),
     BlinkCmpKindBoolean = hl(p.white, p.none),
     BlinkCmpKindClass = hl(p.type, p.none),
@@ -522,7 +429,6 @@ local function generate_highlights(p)
     BlinkCmpKindValue = hl(p.white, p.none),
     BlinkCmpKindVariable = hl(p.variable, p.none),
 
-    -- Snacks.nvim
     SnacksNormal = hl(p.fg, p.bg_float),
     SnacksDashboardNormal = hl(p.fg, p.bg),
     SnacksDashboardDesc = hl(p.fg_dim, p.none),
@@ -563,7 +469,6 @@ local function generate_highlights(p)
     SnacksPickerPreviewTitle = hl(p.steel, p.bg_float, { bold = true }),
     SnacksExplorerNormal = hl(p.fg, p.bg_float),
 
-    -- Gitsigns
     GitSignsAdd = hl(p.git_add, p.none),
     GitSignsChange = hl(p.git_change, p.none),
     GitSignsDelete = hl(p.git_delete, p.none),
@@ -575,13 +480,11 @@ local function generate_highlights(p)
     GitSignsDeleteLn = hl(p.none, p.bg_diff_delete),
     GitSignsCurrentLineBlame = hl(p.fg_dim, p.none, { italic = true }),
 
-    -- Trouble
     TroubleNormal = hl(p.fg, p.bg_float),
     TroubleNormalNC = hl(p.fg, p.bg_float),
     TroubleCount = hl(p.steel, p.none),
     TroubleText = hl(p.fg, p.none),
 
-    -- Which-key
     WhichKey = hl(p.steel, p.none),
     WhichKeyGroup = hl(p.white, p.none),
     WhichKeyDesc = hl(p.fg, p.none),
@@ -590,10 +493,8 @@ local function generate_highlights(p)
     WhichKeyBorder = hl(p.fg_inactive, p.bg_float),
     WhichKeyValue = hl(p.fg_dim, p.none),
 
-    -- Lualine (utility highlights)
     LualineNormal = hl(p.fg, p.bg_statusline),
 
-    -- Mini.icons
     MiniIconsAzure = hl(p.info, p.none),
     MiniIconsBlue = hl(p.steel, p.none),
     MiniIconsCyan = hl(p.info, p.none),
@@ -604,13 +505,11 @@ local function generate_highlights(p)
     MiniIconsRed = hl(p.error, p.none),
     MiniIconsYellow = hl(p.warning, p.none),
 
-    -- Hop
     HopNextKey = hl(p.steel, p.none, { bold = true }),
     HopNextKey1 = hl(p.white, p.none, { bold = true }),
     HopNextKey2 = hl(p.success, p.none),
     HopUnmatched = hl(p.fg_dim, p.none),
 
-    -- Noice
     NoiceCmdline = hl(p.fg, p.bg_float),
     NoiceCmdlineIcon = hl(p.steel, p.none),
     NoiceCmdlineIconSearch = hl(p.white, p.none),
@@ -622,11 +521,9 @@ local function generate_highlights(p)
     NoicePopup = hl(p.fg, p.bg_float),
     NoicePopupBorder = hl(p.fg_inactive, p.bg_float),
 
-    -- Incline
     InclineNormal = hl(p.fg, p.bg_statusline),
     InclineNormalNC = hl(p.fg_dim, p.bg_cursor),
 
-    -- Oil
     OilDir = hl(p.white, p.none),
     OilDirIcon = hl(p.white, p.none),
     OilFile = hl(p.fg, p.none),
@@ -645,7 +542,6 @@ local function generate_highlights(p)
     OilTypeFile = hl(p.fg, p.none),
     OilTypeLink = hl(p.link, p.none),
 
-    -- Diffview
     DiffviewFilePanelTitle = hl(p.steel, p.none, { bold = true }),
     DiffviewFilePanelCounter = hl(p.white, p.none),
     DiffviewFilePanelFileName = hl(p.fg, p.none),
@@ -661,11 +557,9 @@ local function generate_highlights(p)
     DiffviewPrimary = hl(p.steel, p.none),
     DiffviewSecondary = hl(p.white, p.none),
 
-    -- Harpoon
     HarpoonWindow = hl(p.fg, p.bg_float),
     HarpoonBorder = hl(p.fg_inactive, p.bg_float),
 
-    -- Neotest
     NeotestAdapterName = hl(p.white, p.none, { bold = true }),
     NeotestDir = hl(p.white, p.none),
     NeotestExpandMarker = hl(p.fg_inactive, p.none),
@@ -683,13 +577,11 @@ local function generate_highlights(p)
     NeotestWinSelect = hl(p.white, p.none),
     NeotestUnknown = hl(p.fg_dim, p.none),
 
-    -- UFO (folding)
     UfoFoldedBg = hl(p.none, p.bg_cursor),
     UfoFoldedFg = hl(p.fg_dim, p.none),
     UfoFoldedEllipsis = hl(p.steel, p.none),
     UfoCursorFoldedLine = hl(p.none, p.bg_cursor),
 
-    -- Todo-comments
     TodoBgFIX = hl(p.bg_solid, p.error, { bold = true }),
     TodoBgHACK = hl(p.bg_solid, p.steel, { bold = true }),
     TodoBgNOTE = hl(p.bg_solid, p.info, { bold = true }),
@@ -709,21 +601,17 @@ local function generate_highlights(p)
     TodoSignTODO = hl(p.warning, p.none),
     TodoSignWARN = hl(p.warning, p.none),
 
-    -- Tiny Inline Diagnostics
     TinyInlineDiagnosticVirtualTextError = hl(p.error, p.bg_cursor),
     TinyInlineDiagnosticVirtualTextWarn = hl(p.warning, p.bg_cursor),
     TinyInlineDiagnosticVirtualTextInfo = hl(p.info, p.bg_cursor),
     TinyInlineDiagnosticVirtualTextHint = hl(p.hint, p.bg_cursor),
 
-    -- Inc-rename
     IncRenameInputBorder = hl(p.steel, p.bg_float),
     IncRenameInputNormal = hl(p.fg, p.bg_float),
 
-    -- Yanky
     YankyPut = hl(p.none, p.bg_visual),
     YankyYanked = hl(p.none, p.bg_visual),
 
-    -- Render-markdown
     RenderMarkdownH1Bg = hl(p.white, p.bg_cursor),
     RenderMarkdownH2Bg = hl(p.white, p.bg_cursor),
     RenderMarkdownH3Bg = hl(p.white, p.bg_cursor),
@@ -750,22 +638,22 @@ end
 --------------------------------------------------------------------------------
 
 local function set_terminal_colors(_)
-  vim.g.terminal_color_0 = colors.bg_highlight -- black
-  vim.g.terminal_color_1 = colors.clay -- red
-  vim.g.terminal_color_2 = colors.moss -- green
-  vim.g.terminal_color_3 = colors.sand -- yellow
-  vim.g.terminal_color_4 = colors.seafoam -- blue
-  vim.g.terminal_color_5 = colors.fg_muted -- magenta
-  vim.g.terminal_color_6 = colors.sage -- cyan
-  vim.g.terminal_color_7 = colors.fg_normal -- white
-  vim.g.terminal_color_8 = colors.stone -- bright black
-  vim.g.terminal_color_9 = colors.clay -- bright red
-  vim.g.terminal_color_10 = colors.moss -- bright green
-  vim.g.terminal_color_11 = colors.sand -- bright yellow
-  vim.g.terminal_color_12 = colors.seafoam -- bright blue
-  vim.g.terminal_color_13 = colors.fg_bright -- bright magenta
-  vim.g.terminal_color_14 = colors.sage -- bright cyan
-  vim.g.terminal_color_15 = colors.fg_bright -- bright white
+  vim.g.terminal_color_0 = colors.bg_highlight
+  vim.g.terminal_color_1 = colors.error_soft
+  vim.g.terminal_color_2 = colors.success_soft
+  vim.g.terminal_color_3 = colors.warn_soft
+  vim.g.terminal_color_4 = colors.ice
+  vim.g.terminal_color_5 = colors.lavender
+  vim.g.terminal_color_6 = colors.lime
+  vim.g.terminal_color_7 = colors.fg_normal
+  vim.g.terminal_color_8 = colors.slate
+  vim.g.terminal_color_9 = colors.error_soft
+  vim.g.terminal_color_10 = colors.success_soft
+  vim.g.terminal_color_11 = colors.warn_soft
+  vim.g.terminal_color_12 = colors.ice
+  vim.g.terminal_color_13 = colors.rose
+  vim.g.terminal_color_14 = colors.lime
+  vim.g.terminal_color_15 = colors.fg_bright
 end
 
 --------------------------------------------------------------------------------
@@ -773,49 +661,33 @@ end
 --------------------------------------------------------------------------------
 
 local function setup()
-  -- Reset existing highlights
-  if vim.g.colors_name then
-    vim.cmd.hi 'clear'
-  end
-  if vim.fn.exists 'syntax_on' then
-    vim.cmd.syntax 'reset'
-  end
+  if vim.g.colors_name then vim.cmd.hi 'clear' end
+  if vim.fn.exists 'syntax_on' then vim.cmd.syntax 'reset' end
 
   vim.o.termguicolors = true
   vim.o.background = 'dark'
-  vim.g.colors_name = 'forest-canopy'
+  vim.g.colors_name = 'midnight-bloom'
 
-  -- Get palette (respects transparency setting)
   local palette = get_palette()
-
-  -- Generate and apply highlights
   local highlights = generate_highlights(palette)
   for group, settings in pairs(highlights) do
     vim.api.nvim_set_hl(0, group, settings)
   end
-
-  -- Set terminal colors
   set_terminal_colors(palette)
 end
 
 setup()
 
---------------------------------------------------------------------------------
--- PUBLIC API
---------------------------------------------------------------------------------
-
--- Allow toggling transparency at runtime
--- Usage: require('forest-canopy').toggle_transparent()
 return {
   toggle_transparent = function()
     config.transparent = not config.transparent
-    vim.g.forest_canopy_transparent = config.transparent
+    vim.g.midnight_bloom_transparent = config.transparent
     setup()
-    vim.notify('Forest Canopy: Transparent = ' .. tostring(config.transparent), vim.log.levels.INFO)
+    vim.notify('Midnight Bloom: Transparent = ' .. tostring(config.transparent), vim.log.levels.INFO)
   end,
   set_transparent = function(value)
     config.transparent = value
-    vim.g.forest_canopy_transparent = value
+    vim.g.midnight_bloom_transparent = value
     setup()
   end,
 }

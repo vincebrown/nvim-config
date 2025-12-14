@@ -9,27 +9,20 @@ return {
       }
     end,
   },
-  {
-    'embark-theme/vim',
-    lazy = false,
-    priority = 1000,
-    name = 'embark',
-  },
   { 'datsfilipe/vesper.nvim' },
-  {
-    'xero/miasma.nvim',
-    lazy = false,
-    priority = 1000,
-  },
   {
     'AlexvZyl/nordic.nvim',
     lazy = false,
     priority = 1000,
-  },
-  {
-    'ramojus/mellifluous.nvim',
-    lazy = false,
-    priority = 1000,
+    config = function()
+      require('nordic').setup {
+        italic_comments = false,
+        transparent = {
+          bg = true,
+          float = true,
+        },
+      }
+    end,
   },
   {
     'neanias/everforest-nvim',
@@ -589,13 +582,8 @@ return {
           line = '#0a0a0a',
         },
       }
-      require('black-metal').load()
+      -- require('black-metal').load()
     end,
-  },
-  {
-    'dgox16/oldworld.nvim',
-    lazy = false,
-    priority = 1000,
   },
   {
     'mellow-theme/mellow.nvim',
@@ -603,36 +591,7 @@ return {
     priority = 1000,
     config = function()
       vim.g.mellow_transparent = true
-      -- vim.cmd([[colorscheme mellow]])
     end,
-  },
-  {
-    'mcauley-penney/techbase.nvim',
-    opts = {
-      italic_comments = false,
-
-      -- set to true to make the background, floating windows, statusline,
-      -- signcolumn, foldcolumn, and tabline transparent
-      transparent = true,
-
-      -- Here, you can disable plugins. All plugins that techbase supports
-      -- are enabled by default. You do not need to specify the ones you
-      -- want to enable, only those you wish to disable. This table
-      -- accepts key-pair values.
-      plugin_support = {
-        visual_whitespace = false,
-      },
-
-      -- You can enable *only* some plugins by using the "only" table
-      -- inside of the "plugin_support" table. This table accepts strings.
-      -- plugin_support = {
-      --   only = { "visual_whitespace" }
-      -- },
-
-      -- allows you to override any highlight group for finer-grained control
-      hl_overrides = {},
-    },
-    priority = 1000,
   },
   {
     'folke/tokyonight.nvim',
@@ -658,7 +617,6 @@ return {
     end,
   },
   { 'savq/melange-nvim' },
-  { 'AhmedAbdulrahman/aylin.vim' },
   {
     'rebelot/kanagawa.nvim',
     config = function()
@@ -690,39 +648,5 @@ return {
       transparent_background = true,
       transparent_float_background = false,
     },
-  },
-  {
-    'vague2k/vague.nvim',
-    config = function()
-      require('vague').setup {
-        transparent = true,
-        style = {
-          boolean = 'bold',
-          number = 'none',
-          float = 'none',
-          error = 'bold',
-          comments = 'italic',
-          conditionals = 'none',
-          functions = 'none',
-          headings = 'bold',
-          operators = 'none',
-          strings = 'italic',
-          variables = 'none',
-
-          -- keywords
-          keywords = 'none',
-          keyword_return = 'italic',
-          keywords_loop = 'none',
-          keywords_label = 'none',
-          keywords_exception = 'none',
-
-          -- builtin
-          builtin_constants = 'bold',
-          builtin_functions = 'none',
-          builtin_types = 'bold',
-          builtin_variables = 'none',
-        },
-      }
-    end,
   },
 }
