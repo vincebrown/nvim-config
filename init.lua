@@ -13,4 +13,4 @@ vim.g.fjord_transparent = true
 vim.g.ember_transparent = true
 vim.g.abyssal_transparent = true
 vim.g.copper_canyon_transparent = true
-vim.cmd.colorscheme 'nordic'
+vim.cmd.colorscheme 'everforest'
