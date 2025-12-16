@@ -11,7 +11,7 @@ vim.lsp.config('*', {
 })
 
 -- Add tsgo once stable
-vim.lsp.enable { 'vtsls', 'gopls', 'lua_ls', 'ruby_lsp', 'jsonls', 'bashls', 'tailwindcss' }
+vim.lsp.enable { 'tsgo', 'gopls', 'lua_ls', 'ruby_lsp', 'jsonls', 'bashls', 'tailwindcss' }
 
 vim.diagnostic.config {
   severity_sort = true,
