@@ -1,4 +1,5 @@
 return {
+  { 'Everblush/nvim', name = 'everblush' },
   {
     'webhooked/kanso.nvim',
     lazy = false,
