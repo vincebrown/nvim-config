@@ -10,6 +10,9 @@ opt.expandtab = true
 
 opt.inccommand = 'split'
 
+-- Auto-reload files when changed outside of Neovim (important for tmux)
+opt.autoread = true
+
 opt.swapfile = false
 
 g.have_nerd_font = true
