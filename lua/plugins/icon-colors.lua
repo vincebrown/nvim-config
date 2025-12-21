@@ -5,9 +5,7 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   event = 'VeryLazy',
-  config = function()
-    require('tiny-devicons-auto-colors').setup {
-      colors = theme_colors,
-    }
-  end,
+  opts = {
+    colors = theme_colors,
+  },
 }
