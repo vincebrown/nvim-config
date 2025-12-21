@@ -158,6 +158,17 @@ vim.api.nvim_create_autocmd('LspProgress', {
   end,
 })
 
+-- Open help in vertical split
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  group = vim.api.nvim_create_augroup('help-vertical-split', { clear = true }),
+  pattern = { '*.txt' },
+  callback = function()
+    if vim.bo.filetype == 'help' then
+      vim.cmd.wincmd 'L'
+    end
+  end,
+})
+
 -- Close certain filetypes with q
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('close-with-q', { clear = true }),
