@@ -151,6 +151,15 @@ end
 
 vim.api.nvim_create_user_command('LspStatus', lsp_status, { desc = 'Show detailed LSP status' })
 
+--- Open LSP log file
+--- Opens the LSP log file in a new buffer for debugging LSP issues
+local function lsp_log()
+  vim.cmd('edit ' .. vim.lsp.get_log_path())
+end
+
+vim.api.nvim_create_user_command('LspLog', lsp_log, { desc = 'Open LSP log file' })
+vim.keymap.set('n', '<leader>cll', lsp_log, { desc = 'Open LSP log' })
+
 --- Reload Neovim configuration completely
 --- Saves all modified buffers, clears Lua package cache for config modules,
 --- and restarts Lazy with change detection to reload the configuration
