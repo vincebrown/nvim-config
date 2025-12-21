@@ -22,4 +22,8 @@ require('lazy').setup {
   install = { colorscheme = { 'catppuccin-mocha' } },
   checker = { enabled = true },
   ui = { border = 'rounded' },
+  change_detection = {
+    enabled = true,
+    notify = true,
+  },
 }
