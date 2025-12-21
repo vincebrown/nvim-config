@@ -66,13 +66,18 @@ vim.api.nvim_create_user_command('YankPath', yank_path, { desc = 'Copy file path
 local function restart_lsp(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   local clients = vim.lsp.get_clients { buffer = bufnr }
+  local client_names = {}
 
   for _, client in ipairs(clients) do
-    vim.lsp.stop_client(client.id)
+    table.insert(client_names, client.name)
+    client:stop()
   end
 
   vim.defer_fn(function()
     vim.cmd 'edit'
+    if #client_names > 0 then
+      Snacks.notify.info('Restarted: ' .. table.concat(client_names, ', '), { title = 'LSP Restart' })
+    end
   end, 100)
 end
 
