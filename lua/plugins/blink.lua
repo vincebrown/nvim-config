@@ -7,14 +7,29 @@ return {
   ---@type blink.cmp.Config
   opts = {
     keymap = { preset = 'super-tab' },
-    signature = { enabled = false, window = { border = 'padded' } },
-    cmdline = { enabled = true },
+    signature = { enabled = true, window = { border = 'rounded' } },
+    cmdline = {
+      enabled = true,
+      completion = {
+        list = { selection = { preselect = false } },
+        menu = {
+          auto_show = function(ctx)
+            return vim.fn.getcmdtype() == ':'
+          end,
+        },
+        ghost_text = { enabled = true },
+      },
+    },
     appearance = {
       nerd_font_variant = 'mono',
     },
     completion = {
-      documentation = { auto_show = true, window = { border = 'rounded' } },
-      -- ghost_text = { enabled = true },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 150,
+        window = { border = 'rounded' },
+      },
+      ghost_text = { enabled = true },
       menu = {
         border = 'rounded',
         draw = {
@@ -56,9 +71,9 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
       per_filetype = {
-        sql = { 'snippets', 'buffer' },
+        lua = { 'lazydev', inherit_defaults = true },
       },
       providers = {
         lazydev = {
