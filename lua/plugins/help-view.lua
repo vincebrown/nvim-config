@@ -3,7 +3,7 @@ return {
   lazy = false,
   opts = {
     preview = {
-      icon_provider = 'mini', -- "mini" or "devicons"
+      icon_provider = 'mini',
     },
   },
 }
