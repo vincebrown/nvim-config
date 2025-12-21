@@ -1,6 +1,6 @@
 return {
   {
-    'echasnovski/mini.nvim',
+    'nvim-mini/mini.nvim',
     event = 'VeryLazy',
     config = function()
       -- Better Around/Inside textobjects
