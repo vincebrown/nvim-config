@@ -1,5 +1,4 @@
-local utils = require 'core.utils'
-
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'tailwindcss-language-server', '--stdio' },
   root_markers = {
@@ -60,5 +59,4 @@ return {
       },
     },
   },
-  capabilities = utils.create_lsp_capabilities(),
 }

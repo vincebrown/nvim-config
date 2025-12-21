@@ -1,5 +1,3 @@
-local utils = require 'core.utils'
-
 ---@type vim.lsp.ClientConfig
 return {
   cmd = { 'tsgo', '--lsp', '--stdio' },
@@ -73,6 +71,4 @@ return {
       },
     },
   },
-  ---@type lsp.ClientCapabilities
-  capabilities = utils.create_lsp_capabilities(),
 }

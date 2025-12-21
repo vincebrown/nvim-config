@@ -1,5 +1,3 @@
-local utils = require 'core.utils'
-
 ---@type vim.lsp.ClientConfig
 return {
   cmd = { 'lua-language-server' },
@@ -38,6 +36,4 @@ return {
       },
     },
   },
-  ---@type lsp.ClientCapabilities
-  capabilities = utils.create_lsp_capabilities(),
 }

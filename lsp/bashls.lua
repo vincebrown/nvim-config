@@ -1,5 +1,3 @@
-local utils = require 'core.utils'
-
 ---@type vim.lsp.ClientConfig
 return {
   cmd = { 'bash-language-server', 'start' },
@@ -18,6 +16,4 @@ return {
   },
   filetypes = { 'bash', 'sh' },
   root_markers = { '.git' },
-  ---@type lsp.ClientCapabilities
-  capabilities = utils.create_lsp_capabilities(),
 }
