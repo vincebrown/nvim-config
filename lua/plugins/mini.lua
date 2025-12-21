@@ -94,13 +94,11 @@ return {
           value = { glyph = '󰎠', hl = 'MiniIconsBlue' },
           variable = { glyph = '󰀫', hl = 'MiniIconsCyan' },
         },
-        init = function()
-          package.preload['nvim-web-devicons'] = function()
-            require('mini.icons').mock_nvim_web_devicons()
-            return package.loaded['nvim-web-devicons']
-          end
-        end,
       }
+
+      -- Mock nvim-web-devicons for plugins that depend on it
+      -- Must be called after setup() per mini.icons docs
+      MiniIcons.mock_nvim_web_devicons()
       MiniIcons.tweak_lsp_kind()
     end,
   },
