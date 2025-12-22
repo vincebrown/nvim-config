@@ -7,12 +7,15 @@ return {
       popupmenu = {
         enabled = true,
       },
-    lsp = {
-      override = {
-        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-        ['vim.lsp.util.stylize_markdown'] = true,
-      },
+      lsp = {
+        override = {
+          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+          ['vim.lsp.util.stylize_markdown'] = true,
+        },
         progress = {
+          enabled = false,
+        },
+        signature = {
           enabled = false,
         },
       },
@@ -37,9 +40,5 @@ return {
         inc_rename = true,
       },
     },
-  -- stylua: ignore
-   config = function(_, opts)
-      require('noice').setup(opts)
-    end,
   },
 }

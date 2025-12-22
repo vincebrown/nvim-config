@@ -14,28 +14,18 @@ return {
     appearance = {
       nerd_font_variant = 'mono',
     },
-    signature = {
-      enabled = true,
-      trigger = {
-        enabled = false, -- Don't show automatically
-      },
-      window = {
-        max_width = 100,
-        border = 'rounded',
-        show_documentation = false, -- This is the key - don't show docs in signature window
-      },
-    },
     completion = {
       documentation = {
         auto_show = false,
         window = {
-          max_width = 80,
+          max_width = 20,
           border = 'rounded',
         },
       },
       ghost_text = { enabled = true },
       menu = {
-        min_width = 15,
+        min_width = 10,
+        max_width = 20,
         max_height = 10,
         border = 'rounded',
         draw = {
@@ -62,6 +52,7 @@ return {
               end,
             },
             label = {
+              width = { fill = true, max = 20 },
               text = function(ctx)
                 return require('colorful-menu').blink_components_text(ctx)
               end,
@@ -71,6 +62,13 @@ return {
             },
           },
         },
+      },
+    },
+    signature = {
+      enabled = true,
+      window = {
+        max_width = 100,
+        border = 'rounded',
       },
     },
     cmdline = {
