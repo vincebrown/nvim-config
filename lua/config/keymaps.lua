@@ -11,7 +11,7 @@ set('n', '<C-k>', '<C-w>k', { desc = 'Switch window up' })
 
 -- Buffer Management
 set('n', '<leader>w', '<cmd>silent! w<CR>', { desc = 'Write' })
-set('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit' })
+set('n', '<leader>qq', '<cmd>q<cr>', { desc = 'Quit' })
 
 -- Comments
 set('n', '<leader>/', 'gcc', { desc = 'Toggle comment', remap = true })

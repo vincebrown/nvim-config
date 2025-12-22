@@ -25,7 +25,6 @@ return {
       ghost_text = { enabled = true },
       menu = {
         min_width = 10,
-        max_width = 20,
         max_height = 10,
         border = 'rounded',
         draw = {
