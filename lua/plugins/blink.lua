@@ -6,31 +6,37 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    keymap = { preset = 'super-tab' },
-    signature = { enabled = true, window = { border = 'rounded' } },
-    cmdline = {
-      enabled = true,
-      completion = {
-        list = { selection = { preselect = false } },
-        menu = {
-          auto_show = function(ctx)
-            return vim.fn.getcmdtype() == ':'
-          end,
-        },
-        ghost_text = { enabled = true },
-      },
+    keymap = {
+      preset = 'super-tab',
+      ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
+      ['<C-space>'] = { 'show_documentation', 'hide_documentation', 'fallback' },
     },
     appearance = {
       nerd_font_variant = 'mono',
     },
+    signature = {
+      enabled = true,
+      trigger = {
+        enabled = false, -- Don't show automatically
+      },
+      window = {
+        max_width = 100,
+        border = 'rounded',
+        show_documentation = false, -- This is the key - don't show docs in signature window
+      },
+    },
     completion = {
       documentation = {
-        auto_show = true,
-        auto_show_delay_ms = 150,
-        window = { border = 'rounded' },
+        auto_show = false,
+        window = {
+          max_width = 80,
+          border = 'rounded',
+        },
       },
       ghost_text = { enabled = true },
       menu = {
+        min_width = 15,
+        max_height = 10,
         border = 'rounded',
         draw = {
           -- We don't need label_description now because label and label_description are already
@@ -67,13 +73,25 @@ return {
         },
       },
     },
+    cmdline = {
+      enabled = true,
+      completion = {
+        list = { selection = { preselect = false } },
+        menu = {
+          auto_show = function(ctx)
+            return vim.fn.getcmdtype() == ':'
+          end,
+        },
+        ghost_text = { enabled = true },
+      },
+    },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       per_filetype = {
-        lua = { 'lazydev', inherit_defaults = true },
+        lua = { inherit_defaults = true, 'lazydev' },
       },
       providers = {
         lazydev = {

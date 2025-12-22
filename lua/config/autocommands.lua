@@ -196,3 +196,19 @@ vim.api.nvim_create_autocmd('FileChangedShellPost', {
     Snacks.notify.info 'File changed on disk. Buffer reloaded.'
   end,
 })
+
+-- Enable cursorline in active buffer
+vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+  group = vim.api.nvim_create_augroup('cursorline-active', { clear = true }),
+  callback = function()
+    vim.opt_local.cursorline = true
+  end,
+})
+
+-- Disable cursorline in inactive buffer
+vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+  group = vim.api.nvim_create_augroup('cursorline-inactive', { clear = true }),
+  callback = function()
+    vim.opt_local.cursorline = false
+  end,
+})

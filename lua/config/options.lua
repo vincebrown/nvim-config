@@ -71,7 +71,7 @@ opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 opt.inccommand = 'split'
 
--- Show which line your cursor is on
+-- Show which line your cursor is on - this is controlled via an autocommand now
 opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
