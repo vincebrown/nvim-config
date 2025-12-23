@@ -1,6 +1,11 @@
 return {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets', 'xzbdmw/colorful-menu.nvim', 'MahanRahmati/blink-nerdfont.nvim' },
+  dependencies = {
+    'rafamadriz/friendly-snippets',
+    'xzbdmw/colorful-menu.nvim',
+    'MahanRahmati/blink-nerdfont.nvim',
+    'nvim-mini/mini.icons',
+  },
   version = '1.*',
 
   ---@module 'blink.cmp'
@@ -18,7 +23,7 @@ return {
       documentation = {
         auto_show = false,
         window = {
-          max_width = 20,
+          max_width = 60,
           border = 'rounded',
         },
       },

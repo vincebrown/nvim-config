@@ -15,10 +15,17 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+local spec = {
+  { import = 'plugins' },
+}
+
+-- Only load personal plugins on non-work machines
+if os.getenv 'WORK_MACHINE' ~= '1' then
+  table.insert(spec, { import = 'personal-plugins' })
+end
+
 require('lazy').setup {
-  spec = {
-    { import = 'plugins' },
-  },
+  spec = spec,
   install = { colorscheme = { 'catppuccin-mocha' } },
   checker = { enabled = true },
   ui = { border = 'rounded' },
