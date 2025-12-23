@@ -12,17 +12,29 @@ return {
   },
   config = function()
     local wk = require 'which-key'
-    wk.setup {
-      preset = 'modern',
-      delay = 500,
+    local opts = {
+      preset = 'helix',
+      delay = 750,
       layout = {
         width = { min = 20 }, -- min and max width of the columns
         spacing = 5, -- spacing between columns
+      },
+      plugins = {
+        presets = {
+          operators = true,
+          motions = true,
+          text_objects = true,
+          windows = false,
+          nav = false,
+          z = true,
+          g = true,
+        },
       },
       icons = {
         mappings = false,
       },
     }
+    wk.setup(opts)
     wk.add {
       { '<leader>f', group = 'Find' },
       { '<leader>s', group = 'Search' },
