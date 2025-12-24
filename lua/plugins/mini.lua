@@ -184,6 +184,8 @@ return {
           unit = { glyph = '', hl = 'MiniIconsCyan' },
           value = { glyph = '󰎠', hl = 'MiniIconsBlue' },
           variable = { glyph = '󰀫', hl = 'MiniIconsCyan' },
+          -- Minuet AI completion kind
+          minuet = { glyph = '󰚩', hl = 'MiniIconsPurple' },
         },
       }
 
