@@ -10,7 +10,7 @@ vim.lsp.config('*', {
   root_markers = { '.git' },
 })
 
-vim.lsp.enable { 'tsgo', 'gopls', 'lua_ls', 'ruby_lsp', 'jsonls', 'bashls', 'tailwindcss' }
+vim.lsp.enable { 'vtsls', 'gopls', 'lua_ls', 'ruby_lsp', 'jsonls', 'bashls', 'tailwindcss' }
 
 vim.diagnostic.config {
   severity_sort = true,

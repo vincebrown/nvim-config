@@ -42,3 +42,5 @@ end, { desc = 'Previous Error' })
 set('n', '<leader>rr', '<cmd>ReloadNvimConfig<cr>', { desc = 'Reload Neovim configuration' })
 
 set('n', 'yp', '<cmd>YankPath<cr>', { desc = 'Yank Path' })
+set('n', 'yl', '<cmd>YankLineNumber<cr>', { desc = 'Yank Line Number' })
+set('n', 'yls', '<cmd>YankLineSpan<cr>', { desc = 'Yank Line Span' })

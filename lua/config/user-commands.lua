@@ -59,6 +59,97 @@ end
 
 vim.api.nvim_create_user_command('YankPath', yank_path, { desc = 'Copy file path relative to git root to clipboard' })
 
+--- Copy current line number to clipboard
+--- Yanks the current line number to the system clipboard
+--- Useful for referencing specific lines in discussions or documentation
+local function yank_line_number()
+  local line_num = vim.fn.line '.'
+  vim.fn.setreg('+', tostring(line_num))
+  Snacks.notify.info('Copied: ' .. line_num, { title = 'Line Number' })
+end
+
+vim.api.nvim_create_user_command('YankLineNumber', yank_line_number, { desc = 'Copy current line number to clipboard' })
+
+--- Copy current code block line range to clipboard
+--- Uses Treesitter to find the parent node (function, conditional, loop, etc.)
+--- at cursor position and yanks the line range to system clipboard
+--- Falls back to current line if Treesitter is not available or no parent found
+local function yank_line_span()
+  local has_treesitter, ts_utils = pcall(require, 'nvim-treesitter.ts_utils')
+
+  if not has_treesitter then
+    -- Fallback to current line if Treesitter not available
+    local line_num = vim.fn.line '.'
+    vim.fn.setreg('+', tostring(line_num))
+    Snacks.notify.warn('Treesitter not available, copied current line: ' .. line_num, { title = 'Line Span' })
+    return
+  end
+
+  -- Get the node at cursor
+  local node = ts_utils.get_node_at_cursor()
+  if not node then
+    local line_num = vim.fn.line '.'
+    vim.fn.setreg('+', tostring(line_num))
+    Snacks.notify.warn('No Treesitter node found, copied current line: ' .. line_num, { title = 'Line Span' })
+    return
+  end
+
+  -- Find a meaningful parent node (function, block, conditional, etc.)
+  -- These are common node types across languages that represent logical blocks
+  local meaningful_types = {
+    'function_declaration',
+    'function_definition',
+    'method_declaration',
+    'method_definition',
+    'arrow_function',
+    'function',
+    'if_statement',
+    'for_statement',
+    'while_statement',
+    'block',
+    'class_declaration',
+    'class_definition',
+    'try_statement',
+    'object',
+    'table_constructor',
+  }
+
+  local function is_meaningful(n)
+    local node_type = n:type()
+    for _, type in ipairs(meaningful_types) do
+      if node_type:match(type) then
+        return true
+      end
+    end
+    return false
+  end
+
+  -- Walk up the tree to find a meaningful parent
+  local current = node
+  while current do
+    if is_meaningful(current) then
+      break
+    end
+    current = current:parent()
+  end
+
+  -- If no meaningful parent found, use the immediate node
+  if not current then
+    current = node
+  end
+
+  local start_row, _, end_row, _ = current:range()
+  -- Treesitter rows are 0-indexed, convert to 1-indexed line numbers
+  local start_line = start_row + 1
+  local end_line = end_row + 1
+
+  local line_span = string.format('ln %d - ln %d', start_line, end_line)
+  vim.fn.setreg('+', line_span)
+  Snacks.notify.info('Copied: ' .. line_span, { title = 'Line Span' })
+end
+
+vim.api.nvim_create_user_command('YankLineSpan', yank_line_span, { desc = 'Copy current code block line range to clipboard' })
+
 --- Restart all LSP clients for a buffer
 --- Stops all LSP clients attached to the buffer and re-edits the file
 --- to trigger LSP reattachment
