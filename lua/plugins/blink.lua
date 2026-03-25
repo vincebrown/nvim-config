@@ -34,6 +34,9 @@ return {
     end
 
     local opts = {
+      enabled = function()
+        return not vim.tbl_contains({ 'markdown' }, vim.bo.filetype)
+      end,
       keymap = {
         preset = 'super-tab',
         ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
