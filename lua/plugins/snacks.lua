@@ -46,6 +46,26 @@ return {
           cmd = { 'delta' },
         },
       },
+      sources = {
+        notifications = {
+          actions = {
+            yank_msg = function(picker, item)
+              local msg = item.item.msg or item.item.text
+              if msg then
+                vim.fn.setreg('+', msg)
+                Snacks.notify.warn('Copied to clipboard')
+              end
+            end,
+          },
+          win = {
+            list = {
+              keys = {
+                ['<c-y>'] = 'yank_msg',
+              },
+            },
+          },
+        },
+      },
     },
     icons = {
       files = {
@@ -84,7 +104,9 @@ return {
       desc = 'Open Buffers',
     },
     { '<leader>:', function() Snacks.picker.command_history() end, desc = 'Command History' },
-    { '<leader>sn', function() Snacks.picker.notifications() end, desc = 'Notification History' },
+    { '<leader>sn', function()
+      Snacks.picker.notifications()
+    end, desc = 'Notification History' },
     { '<leader>e', function() Snacks.explorer() end, desc = 'File Explorer' },
 
     -- Find
